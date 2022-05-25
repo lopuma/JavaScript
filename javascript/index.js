@@ -20,6 +20,6 @@ for (let index = 0; index < Nombre.length; index++) {
 La bicilceta pequeña volo a tienda lentamente
 */
 console.log("\nLa edad es : ", Edad);
-
+console.log("Ayelen kaylie negrita@gmail.com ")
 var palabrasLocas = "La " + miSustantivo + " " + miAdjetivo + " " + miVerbo + " a la tienda " + miAdverbio + ".";
 
