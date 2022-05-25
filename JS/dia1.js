@@ -31,6 +31,16 @@ console.log("\nLa edad es : ", Edad);
 
 var palabrasLocas = "La " + miSustantivo + " " + miAdjetivo + " " + miVerbo + " a la tienda " + miAdverbio + ".";
 
+const data1 = document.querySelector('#data1')
+const data2 = document.querySelector('#data2')
+const btn1 = document.querySelector('#btn1')
+
+btn1.addEventListener('click', () => {
+    dato1 =  data1.value
+    dato2 = data2.value
+    console.log("Pulsado")
+    console.log(`El dato 1 es ${dato1}, mas el dato2 es ${dato2} y el tipo es ${typeof (dato1)}`)
+})
 /* Bucle for (OF)
 
 var notas = [2,4,5,6,8,7,4];
