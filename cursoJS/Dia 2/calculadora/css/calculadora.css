@@ -1,0 +1,70 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	height: 100vh;	/* el body tiene el 100% de la altura de la pantalla */
+	margin: 0;
+	font-family: sans-serif;
+	
+	/* Para centrar el contenido en horizontal y vertical */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	background-image: url("https://cdn.pixabay.com/photo/2018/04/04/22/14/abstract-3291293_960_720.jpg");	
+	background-size: cover;
+	background-position: center;
+}
+
+.calculadora {
+	width: 400px;
+	border: 2px solid #666;
+	border-radius: 6px;
+	padding: 10px;
+    background: linear-gradient(to bottom,  #f7fbfc 0%,#dee4ed 57%,#c5d2e0 100%);
+	box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+}
+.pantalla {
+	height: 80px;
+	background-color: darkseagreen;
+	color: black;
+	border: 8px solid #333;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	box-shadow: inset 0 4px 5px 0 rgba(0, 0, 0, 0.4);
+	
+	display: flex; align-items: center; justify-content: flex-end;
+	padding: 0 12px;
+	font-size: 300%; font-family: monospace;
+}
+.teclado {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 50px;
+	gap: 10px;
+}
+
+.teclado button {
+	border: 2px solid #333;
+	border-radius: 4px;
+	font-size: 24px;
+	background-color: #DDD;
+	box-shadow: inset 0 2px 1px 0 rgba(255, 255, 255, .6), 
+		inset 0 -2px 1px 0 rgba(0,0,0, .4);
+}
+.teclado button:active {
+	filter: brightness(90%);
+}
+.teclado button[data-accion] {
+	background-color: #444;
+	color: white;
+}
+.teclado button[data-texto="*"],
+.teclado button[data-texto="/"],
+.teclado button[data-texto="-"],
+.teclado button[data-texto="+"],
+.teclado button[data-texto="%"]
+{
+	background-color: #5d82a7;
+	color: white;
+}

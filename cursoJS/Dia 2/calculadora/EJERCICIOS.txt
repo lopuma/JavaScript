@@ -1,0 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////
+EJERCICIOS CALCULADORA
+--------------------------------------------------------------------------------
+Hazlos en el orden que prefieras
+////////////////////////////////////////////////////////////////////////////////
+
+EJERCICIO 1: esto es para que te desmelenes. Haz cualquier cosa en el evento btnSeta.onclick, desde un alert hasta algún efecto psicotrópico. Experimenta, haz el chorra.
+
+EJERCICIO 2: hay un pequeño porblema ahora mismo: cuando haces un cálculo (pulsas la tecla =) y no hay errores, el resultado aparece en pantalla. Pero si en ese momento vuelves a pulsar la tecla =, entonces da un error. ¿Por qué ocurre esto? ¿Y cómo lo arreglarías?
+
+EJERCICIO 3: en btnBorrar.onclick, haz que si borramos todos los caracteres, la pantalla nos muestre un 0
+
+EJERCICIO 4: añade un nuevo evento de teclado, para la tecla "ñ". Al pulsarla, haz que la calculadora se ponga boca abajo (pista: referencia al div de la calculadora; y googlea "css flip vertical", o "css rotate element")
+
+INVESTIGACIÓN 1: Busca por internet tutoriales para crear una calculadora en JS, y compara el código con este. Verás que hay muchas formas distintas de llegar a lo mismo. Algunas te resultarán más fáciles que otras. Fíjate en las fechas de los tutoriales: por lo general, cuanto más antiguos, más complicados.
+
+EJERCICIO 5: Vas a añadir nuevos botones a la calculadora, en una nueva fila:
+	"(" para abrir un paréntesis, cuando queramos agrupar operaciones
+	")" para cerrar paréntesis
+
+RETO 1 (cómo odio esta puta palabra, apesta a coaching barato): si te atreves, lánzate con botones para cambiar el signo al resultado, y para elevar al cuadrado. No te digo de hacer otras operaciones porque, llegado un punto, la complejidad se dispara, y seguramente tendrás que replantearte la aplicación por completo.
+
+RETO 2: Implementar un HISTORIAL de cálculos. Es decir, tendrás que tener un array global (por ejemplo, let historial = []). Cada vez que hagas un cálculo, antes de resetear la pantalla crea un objeto con dos propiedades: "expresion" y "resultado", que almacenen tu cálculo, y mete ese objeto en el historial (con push). Y ya en plan bestia, podrías implementar un par de botones adicionales, para navegar por el historial y recuperar los cálculos anteriores. Este reto no es que sea difícil, pero sí tiene algo de trabajo
+

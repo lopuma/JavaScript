@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Gestión de vídeos 0.1 alpha</title>
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+	<!-- INICIO CABECERA APLICACIÓN -->
+	<header>
+		<h1>Gestión vídeos</h1>
+		<nav>
+			<a href="index.html">Inicio</a>
+			<a href="nuevo.html">Crear vídeo</a>
+			<a href="#" id="btnBorrar">Borrar todo</a>
+			<a href="#" id="btnExportar" download="datos.json">Exportar</a>
+			<a href="#" id="btnImportar">Importar</a>
+			<input type="file" name="fileImportar" id="fileImportar"  accept=".txt,.json" class="oculto">
+		</nav>
+	</header>
+	<!-- FIN CABECERA APLICACIÓN -->
+	
+	<main>
+	</main>
+	
+	<!-- INICIO FORMULARIO -->
+	<div class="overlay">
+		<form action="#" autocomplete="off">
+			<label for="url">URL del vídeo:</label>
+			<input type="text" id="url" name="url">
+			
+			<label for="titulo">Título:</label>
+			<input type="text" id="titulo" name="titulo">
+			
+			<label for="categoria">Categoría:</label>
+			<select name="categoria" id="categoria">
+				<option value="" disabled selected>Selecciona una categoría</option>
+				<option value="Clásica">Clásica</option>
+				<option value="Medieval">Medieval</option>
+				<option value="Folk">Folk</option>
+				<option value="Electrónica">Electrónica</option>
+				<option value="Pop">Pop</option>
+				<option value="Rock">Rock</option>
+				<option value="Blues">Blues</option>
+				<option value="Psicodelia">Psicodelia</option>
+				<option value="Punk">Punk</option>
+				<option value="Hardcore">Hardcore</option>
+				<option value="Heavy Metal">Heavy Metal</option>
+				<option value="Metal Extremo">Metal Extremo</option>
+				<option value="Grindcore">Grindcore</option>
+				<option value="Noise">Noise</option>
+				<option value="Otros">Otros</option>
+			</select>
+			
+			<label for="visitas">Nº visitas:</label>
+			<input type="number" id="visitas" name="visitas" value="0">
+			
+			<button id="btnOk" type="button">OK</button>
+			<button id="btnCancelar" type="button">Cancelar</button>
+		</form>
+	</div>
+	<!-- FIN FORMULARIO -->
+	
+	
+	<script src="js/comun.js"></script>
+	<script src="js/nuevo.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

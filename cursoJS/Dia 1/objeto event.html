@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">Botón 1</button>
+    <button id="btn2">Botón 2</button>
+    <button id="btn3" onclick="click3()">Botón 3</button>
+
+    <script>
+        let btn1 = document.querySelector("#btn1");
+        let btn2 = document.querySelector("#btn2");
+
+        // EVENTO 1:
+        // Este es el método ñapascript: el segundo evento machaca al primero
+        btn1.onclick = function() {
+            console.log("Has clicado el botón 1");
+        }
+        btn1.onclick = function() {
+            console.log("Arre arre caballito");
+        }
+
+        // EVENTO 2:
+        // Esto es más formal: el segundo evento SE AÑADE al primero
+        btn2.addEventListener("click", function(){
+            console.log("Has clicado el botón 2");
+        });
+        btn2.addEventListener("click", function(){
+            console.log("Ojo con los Orozco...");
+        });
+
+        // EVENTO 3:
+        function click3() {
+            console.log("Has clicado el botón 3");
+        }
+    </script>
+
+
+</body>
+</html>

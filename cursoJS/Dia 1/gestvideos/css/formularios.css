@@ -1,0 +1,59 @@
+/* ===================================================== */
+/* ESTILOS PARA LOS FORMULARIOS DE LA APLICACIÓN */
+/* ===================================================== */
+.overlay {
+	position: fixed;
+	top: 60px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0, 0.5);
+	/* para centrar el contenido en horizontal y vertical usaremos la técnica flex */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.overlay form {
+	background-color: white;
+	padding: 20px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0, 0.45);
+}
+.overlay form label{
+	
+}
+.overlay form input, 
+.overlay form select {
+	margin: 10px 0;
+}
+.overlay form button {
+	background-color: #a8d52a;
+	color: white;
+	border: 0;
+	height: 40px;
+}
+.overlay form button:hover {
+	background-color: #c7e66e;
+}
+.overlay form button:active {
+	background-color: #8db41f;
+}
+
+.overlay form #btnCancelar {
+	background-color: #d5442a;
+	margin-top: 10px;
+}
+.overlay form #btnCancelar:hover {
+	background-color: #e28271;
+}
+.overlay form #btnCancelar:active {
+	background-color: #a32913;
+}
+
+
+
+
+
+

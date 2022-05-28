@@ -1,0 +1,9 @@
+@import url("root.css");
+@import url("base.css");
+@import url("formularios.css");
+@import url("temas.css");
+
+/*
+Cuando importas otros archivos css con @import, asegúrate de que esos @import están al principio de todo. No pongas NADA antes, ni siquiera comentarios
+El orden de los @import puede afectar al resultado, así que planifícalo bien
+*/

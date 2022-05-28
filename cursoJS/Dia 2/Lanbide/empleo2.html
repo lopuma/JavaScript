@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas de empleo cde Lanbide</title>
+    <style>
+        * {box-sizing: border-box;}
+        body {
+            margin:0; height: 100vh;
+            font-family: sans-serif;
+        }
+        nav {
+            height: 80px;
+            background-color: beige;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        main > div {
+            border: 1px solid #CCC;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        Buscador empleo Lanbide
+    </nav>
+    <main>
+
+    </main>
+    
+    
+    
+    
+    
+    
+    <script>
+        function ofertasLanbide(datos) {
+            console.log(datos);
+            // podemos hacer operaciones con los datos (paginación, filtrado, ordenación, etc)
+            // ....
+            let subconjunto = [];
+            for(var i=0; i<datos.length; i++) {
+                subconjunto.push(datos[i]);
+            }
+            // Experimento:
+            // Esto es un FILTRADO de un array por un criterio personalizado (en este caso, que la propiedad "municipio" del item del array sea "HONDARRIBIA")
+            subconjunto = subconjunto.filter(function(elemento){
+                return elemento.municipio == "HONDARRIBIA";
+            });
+
+            // Llamamos a la función dibuja()
+            dibuja(subconjunto);
+        }
+
+
+        function dibuja(datos) {
+            let main = document.querySelector("main");
+            // Vacío el main, por si tuviera algo de antes
+            main.innerHTML = "";
+
+            for(let item of datos) {
+                main.innerHTML += `
+                <div>
+                    <h3>${item.desEmpleo}</h3>
+                    <hr>
+                    <p>${item.desPuesto}</p>
+                </div>
+                `;
+            }
+        }
+
+
+    </script>
+
+    
+    <script src="https://apps.lanbide.euskadi.net/apps/OF_OFERTAS_ODE_JSON?jsonCallback=ofertasLanbide"></script>
+
+
+</body>
+</html>

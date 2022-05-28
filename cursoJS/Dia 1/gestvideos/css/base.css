@@ -1,0 +1,152 @@
+/* ESTILOS PRINCIPALES DEL PROYECTO */
+* {
+	/* todos los bordes se dibujan hacia adentro: */
+	box-sizing: border-box;
+}
+body {
+	font-family: sans-serif, Arial;
+	/* Con esto, usamos el valor de la variable --fuente-tam-base para el tamaño de la fuente */
+	font-size: var(--fuente-tam-base); /* <-- OJO!! */
+	color: #666666;
+	height: 100vh; /* vh = % de la altura del navegador */
+}
+
+/* ===================================================== */
+/* LAYOUT GENERAL Y CLASES AUXILIARES */
+/* ===================================================== */
+body > header {
+	height: 60px;
+}
+body > main {
+	height: calc(100vh - 60px);
+}
+.oculto {
+	display: none;
+}
+/* ===================================================== */
+
+
+
+/* ===================================================== */
+/* HEADER DE LA APLICACIÓN */
+/* ===================================================== */
+body > header {
+	background-color: #a8d52a;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+body > header h1 {
+	font-size: 2rem;
+	margin-left: 15px;
+}
+body > header nav {
+	/*margin-right: 15px;*/
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+body > header nav a {
+	display: block;
+	color: white;
+	text-decoration: none;
+	height: 100%;
+	line-height: 60px;
+	padding: 0 15px;
+	transition: all 0.3s;
+}
+body > header nav a:hover {
+	background-color: rgba(255,255,255, 0.3);
+}
+body > header nav a:active {
+	background-color: rgba(0,0,0, 0.3);
+}
+/* ===================================================== */
+
+
+
+/* ===================================================== */
+/* LISTADO DE VÍDEOS */
+/* ===================================================== */
+main {
+	display: grid;
+	/* Entender esta línea da casi para un curso. Pero es posiblemente la línea más potente que hay en css ahora mismo. Te permite hacer diseños responsivos sin usar las media queries */
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 20px;
+	padding: 15px;
+	/* Esto es para que cada fila nueva que se cree tenga la altura mínima de su contenido. Es importante si vamos a meter footers o cosas que aparecen cuando pasamos el ratón por encima */
+	grid-auto-rows: min-content;
+	
+	background-image: url("https://storage.needpix.com/rsynced_images/abstract-3304213_1280.png");
+	background-size: cover;
+	background-position: center;
+}
+main div {
+	position: relative;
+	overflow: hidden;
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.35);
+}
+main div img {
+	width: 100%;
+	transition: all 3s;
+}
+main div button {
+	border: 0;
+	background-color: rgba(220,220,255, 0.75);
+	padding: 0;
+	width: 30px; height: 30px;
+}
+main div button:nth-of-type(1) {
+	position: absolute;
+	top: 0; 
+	right: 0;
+}
+main div button:nth-of-type(2) {
+	position: absolute;
+	top: 30px; 
+	right: 0;
+}
+main div button:nth-of-type(3) {
+	position: absolute;
+	top: 60px; 
+	right: 0;
+}
+main div footer {
+	position: absolute;
+	/*top: 0; */
+	/*left: -50%;*/
+	/*bottom: 0;*/
+	top: 100%;
+	width: 100%;
+	padding: 8px;
+	background-color: rgba(255, 255, 255, 0.85);
+	transition: all 0.3s;
+}
+main div:hover footer {
+	transform: translateY(-100%);
+}
+main div:hover img {
+	transform: scale(1.1);
+}
+main div button:hover {
+	background-color: white;
+}
+main div button:active {
+	background-color: orange;
+}
+/* ===================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

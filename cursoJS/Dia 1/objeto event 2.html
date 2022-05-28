@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            min-height: 200vh;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn1">Botón 1</button>
+    <button id="btn2">Botón 2</button>
+    <!-- Si queremos que una llamada explícita desde el html pase información del evento (JS no lo hace automáticamente en este caso), hay que poner entre paréntesis la palabra event -->
+    <button id="btn3" onclick="click3(event)">Botón 3</button>
+
+    <script>
+        let btn1 = document.querySelector("#btn1");
+        let btn2 = document.querySelector("#btn2");
+
+        // Cuando se produce un evento, JS le pasa a la función de forma automática un objeto con información sobre ese evento
+        // EVENTO 1:
+        btn1.onclick = function(evento) {
+            console.log("Has clicado el botón 1");
+            console.log(evento);
+            // La propiedad target contiene una REFERENCIA al objeto donde se ha producido el evento
+            console.log(evento.target);
+        }
+        
+        // EVENTO 2:
+        btn2.addEventListener("click", function(evento){
+            console.log("Has clicado el botón 2");
+            console.log(evento);
+        });
+        
+        // EVENTO 3:
+        function click3(evento) {
+            console.log("Has clicado el botón 3");
+            console.log(evento);
+        }
+
+
+        window.onscroll = function(evento) {
+            console.log(evento);
+        }
+    </script>
+
+
+</body>
+</html>

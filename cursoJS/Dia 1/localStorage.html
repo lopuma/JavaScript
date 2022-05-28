@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+    
+    <script>
+        // Del localStorage, abre el cajón "mensaje" y pilla sus contenidos
+        let datos = localStorage.getItem("mensaje");
+        // Si no existe ese cajón en localStorage, datos contendrá el valor especial "null", que significa "nada válido"
+        // Cuando se trabaja con localStorage, es una buena práctica comprobar primero si existe ese cajón, y en caso de que no exista, darle un valor por defecto
+        if(datos == null) {
+            datos = "Primer mensaje";
+            localStorage.setItem("mensaje", datos);
+        }
+
+        // localStorage.clear() vacía todos los cajones de localSotrage
+
+        // el localStorage depende del DOMINIO. Es decir, que el localStorage de elpais.com solo puede acceder a sus propios datos, así como el de marca.com, diariovasco.com, o localhost
+
+        // Otra cosa: si haces muchas aplicaciones locales que usen localStorage, acabarás creando cajones con el mismo nombre. Esto es chungo
+        console.log(datos);
+
+    </script>
+
+
+</body>
+</html>
