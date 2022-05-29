@@ -27,4 +27,5 @@ RETO 1 (cómo odio esta puta palabra, apesta a coaching barato): si te atreves, 
 		HECHO, al resultado le he añadido el =, cuando muestra un resultado.
 
 RETO 2: Implementar un HISTORIAL de cálculos. Es decir, tendrás que tener un array global (por ejemplo, let historial = []). Cada vez que hagas un cálculo, antes de resetear la pantalla crea un objeto con dos propiedades: "expresion" y "resultado", que almacenen tu cálculo, y mete ese objeto en el historial (con push). Y ya en plan bestia, podrías implementar un par de botones adicionales, para navegar por el historial y recuperar los cálculos anteriores. Este reto no es que sea difícil, pero sí tiene algo de trabajo
+		HECHO.
 
