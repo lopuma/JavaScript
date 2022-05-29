@@ -16,7 +16,11 @@ let expresion = "0";
 let cero = "0";
 let igual = "";
 var voltea = false;
-var exp = false;
+var expandirAdd = false;
+var divHistorial = ""
+let historial = []
+let totalHistorial = []
+var switchOn = true;
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,6 +30,7 @@ for(let item of arrBtnTexto) {
 		inicializarExpresion(); 
 		expresion += this.dataset.texto;
 		pantalla.innerHTML = expresion;
+		btnReset.innerHTML = "C";
 	}
 	
 	let caracter = item.dataset.texto;
@@ -33,6 +38,7 @@ for(let item of arrBtnTexto) {
 		inicializarExpresion(); 
 		expresion += evento.key;
 		pantalla.innerHTML = expresion;
+		btnReset.innerHTML = "C";
 	})
 	
 }
@@ -45,26 +51,36 @@ for(let item of arrBtnTexto) {
 btnSeta.onclick = function() {
 }
 
-btnReset.onclick = function() {
+btnReset.onclick = function(evento) {
 	expresion = "0";
 	pantalla.innerHTML = expresion;
 	cero = "0";
 	igual = "";
+	console.log(btnReset.innerHTML);
+	if ( btnReset.innerHTML == "AC" ){
+		btnReset.innerHTML = "AC";
+		console.log(btnReset.innerHTML);
+		if (historial.length != 0) {
+			deleteHistorial();
+		}
+	}else{
+		btnReset.innerHTML = "AC";
+	}
 }
 
 btnBorrar.onclick = function() {
 	inicializarExpresion();
 	expresion = expresion.slice(0, expresion.length -1);
-	console.log(expresion)
 	if ( expresion.length == 0 ){
 		expresion = '0';
 		cero = "0";
 		igual = "";
 		pantalla.innerHTML = expresion;
+		btnReset.innerHTML = "AC";
 	} else {
 		pantalla.innerHTML = expresion;
 	}
-	console.log(expresion);
+	
 }
 
 btnIgual.onclick = function() {
@@ -75,32 +91,46 @@ btnIgual.onclick = function() {
 			expresion=resultado;
 		} else {
 			pantalla.innerHTML = "= " +resultado.toString().substr(0,12);
-			igual = "= " +resultado.toString().substr(0,12)
+			igual = "= " +resultado
+			historial.push(expresion);
+			totalHistorial.push(expresion);
 		}
 	} catch(error) {
-		pantalla.innerHTML = "Expresión malformada";
+		pantalla.innerHTML = "Error";
 		pantalla.style.fontSize = "200%"
 		cero = '0';
 		igual = "";
 	}
+	if (switchOn){
+		crearHistorial();
+		switchOn = false;
+	}
+	lenHisto =  historial.length;
+	if ( lenHisto <= 3 ){
+		añadirHistorial();
+	} else{
+		historial.shift()
+		añadirHistorial();
+	}
+	
 }
 
 btnExpandir.onclick = function() {
 	let btn1Agrupar = document.getElementById("agr1");
 	let btn2Agrupar = document.getElementById("agr2");
 	let btnHistory = document.getElementById("hist");
-	if (exp){
+	if (expandirAdd){
 		btn1Agrupar.parentNode.removeChild(btn1Agrupar);
 		btn2Agrupar.parentNode.removeChild(btn2Agrupar);
 		btnHistory.parentNode.removeChild(btnHistory);
-		exp = false;
+		expandirAdd = false;
 	} else{
 		txt1 = "("
 		txt2 = ")"
-		txt3 = "His"
+		txt3 = "hist"
 		const btn1 = document.createElement("button");
-		const btn2 = document.createElement("button")
-		const btn3 = document.createElement("button")
+		const btn2 = document.createElement("button");
+		const btn3 = document.createElement("button");
 		btn1.onclick = function(){
 			inicializarExpresion(); 
 			expresion += this.dataset.texto;
@@ -111,6 +141,15 @@ btnExpandir.onclick = function() {
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
+		btn3.onclick = function() {
+			const totalRecord = document.createElement("div");
+			totalRecord.className="totalRecord";
+			for ( var i=0; i<totalHistorial.length; i++ ) {
+				totalRecord.innerHTML = totalHistorial.join("<br>");
+			}
+			var parentDiv = calculadora.parentNode;
+			parentDiv.insertBefore(totalRecord, calculadora);
+		}
 		btn1.innerHTML = txt1;
 		btn2.innerHTML = txt2;
 		btn3.innerHTML = txt3;
@@ -119,12 +158,13 @@ btnExpandir.onclick = function() {
 		btn3.id = "hist";
 		btn1.setAttributeNS("(", "data-texto", "(")
 		btn2.setAttributeNS(")", "data-texto", ")")
+		btn3.setAttributeNS("historial", "data-texto", "record")
 
 		var parentDiv = btnExpandir.parentNode;
 		parentDiv.insertBefore(btn1, btnExpandir);
 		parentDiv.insertBefore(btn2, btnExpandir);
 		parentDiv.insertBefore(btn3, btnExpandir);
-		exp = true;
+		expandirAdd = true;
 	}
 }
 /////////////////////////////////////////////////////////////////////////
@@ -162,6 +202,23 @@ Mousetrap.bind(")", function() {
 	expresion += texto;
 	pantalla.innerHTML = expresion;
 })
+function crearHistorial() {
+	divHistorial = document.createElement("div");
+	divHistorial.className = "historial";
+	var parentDiv = pantalla.parentNode;
+	parentDiv.insertBefore(divHistorial, pantalla);
+}
+
+function añadirHistorial() {
+	for ( var i=0; i<historial.length; i++ ) {
+		divHistorial.innerHTML = historial.join("<br>");
+	}
+}
+function deleteHistorial(){
+	divHistorial.parentNode.removeChild(divHistorial);
+	historial = []
+	switchOn = true;
+}
 
 function inicializarExpresion() {
 	pantalla.style.fontSize = "300%"
@@ -173,6 +230,7 @@ function inicializarExpresion() {
 		igual = "";
 	}
 }
+
 /////////////////////////////////////////////////////////////////////////
 
 
