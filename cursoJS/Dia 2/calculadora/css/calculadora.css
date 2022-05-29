@@ -23,6 +23,7 @@ body {
 	padding: 10px;
     background: linear-gradient(to bottom,  #f7fbfc 0%,#dee4ed 57%,#c5d2e0 100%);
 	box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
+	/* transform: rotate(180deg); */
 }
 .pantalla {
 	height: 80px;
@@ -43,7 +44,10 @@ body {
 	grid-auto-rows: 50px;
 	gap: 10px;
 }
-
+.teclado button:hover {
+	background-color: #FB7E29;
+	color: #fff;
+	}
 .teclado button {
 	border: 2px solid #333;
 	border-radius: 4px;
@@ -59,6 +63,10 @@ body {
 	background-color: #444;
 	color: white;
 }
+.teclado button[data-accion]:hover {
+	background-color: #FB7E29;
+	color: #fff;
+	}
 .teclado button[data-texto="*"],
 .teclado button[data-texto="/"],
 .teclado button[data-texto="-"],
@@ -68,3 +76,13 @@ body {
 	background-color: #5d82a7;
 	color: white;
 }
+
+.teclado button[data-texto="*"]:hover,
+.teclado button[data-texto="/"]:hover,
+.teclado button[data-texto="-"]:hover,
+.teclado button[data-texto="+"]:hover,
+.teclado button[data-texto="%"]:hover
+{
+	background-color: #FB7E29;
+	color: #fff;
+	}
