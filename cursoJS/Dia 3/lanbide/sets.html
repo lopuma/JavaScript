@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let colorines = [];
+        let colores = new Set();
+
+        colorines.push("rojo");
+        colorines.push("verde");
+        colorines.push("naranja");
+        colorines.push("gris");
+        colorines.push("rojo");
+        colorines.push("gris");
+        console.log(colorines);
+        
+        colores.add("rojo");
+        colores.add("verde");
+        colores.add("naranja");
+        colores.add("rojo");
+        colores.add("gris");
+        colores.add("rojo");
+        colores.add("gris");
+        console.log(colores);
+
+        // Puedo gerenar un Set a partir de un array. Con eso directamente le elimino los duplicados:
+        let yuyu = new Set(colorines);
+        console.log(yuyu);
+        
+        // ¿Y si quiero convertir el Set en un array?
+        // Para esto hay varias técnicas, pero la más simple y popular es usar el OPERADOR SPREAD:
+        let pipo = [...yuyu];
+        console.log(pipo.sort());
+
+
+        
+
+    </script>
+
+
+</body>
+</html>

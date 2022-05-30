@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        // El operador spread se usa también para hacer COPIAS de arrays y de objetos. No es un tema tan trivial como piensas
+        
+        // En el caso de los números, booleanos y cadenas, podemos copiar sus valores de una variable a otra
+        var a = 2;
+        var b = a;
+        b = 55;
+
+
+        // Pero en el caso de los arrays...
+        var col1 = ["rojo", "verde", "azul"];
+        var col2 = col1;
+        col2[1] = "blanco";
+
+        // En este caso, col2 es una REFERENCIA a col1. De modo que si cambiamos algo en col2, lo estamos cambiando también en col1, y viceversa
+
+        // con los objetos pasa exactamente lo mismo que con los arrays. Haz tú mismo la prueba.
+
+
+        // Esto me plantea un problema si quiero COPIAR un array o un objeto. Para solucionarlo hay muchas técnicas, trucos y ñapas. Pero una de las más elegantes es esta:
+        var col3 = [...col1];
+        col3[1] = "negro";
+
+        // Tiene un problema: que si queremos copiar arrays de más de una dimensión, u objetos de más de un nivel de profundidad, no nos sirve, porque solo copia el primer nivel o dimensión.
+
+        // En el caso de que quieras una copia total e infalible, tienes el truco más guarro del universo:
+        var col4 = JSON.parse(JSON.stringify(col1));
+        col4[1] = "lavanda";
+
+
+    </script>
+
+
+</body>
+</html>
