@@ -27,7 +27,7 @@ let historial = []
 // Array que almacenara todo el historial
 let totalHistorial = []
 // switch que activar si esta creado el historial o no
-var switchOn = true;
+var switchOn = false;
 var switchOnTotal = true;
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -35,21 +35,20 @@ var switchOnTotal = true;
 // EVENTOS CLICK PARA LOS BOTONES "NORMALES"
 for(let item of arrBtnTexto) {
 	item.onclick = function(evento) {
-		inicializarExpresion(); 
+		inicializarExpresion();
 		expresion += this.dataset.texto;
 		pantalla.innerHTML = expresion;
 		btnReset.innerHTML = "C";
-		console.log(expresion)
 	}
-	
+
 	let caracter = item.dataset.texto;
 	Mousetrap.bind(caracter, function(evento){
-		inicializarExpresion(); 
+		inicializarExpresion();
 		expresion += evento.key;
 		pantalla.innerHTML = expresion;
 		btnReset.innerHTML = "C";
 	})
-	
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,6 +66,7 @@ btnReset.onclick = function() {
 	if ( btnReset.innerHTML == "AC" ){
 		btnReset.innerHTML = "AC";
 		deleteHistorial();
+
 	}else{
 		btnReset.innerHTML = "AC";
 	}
@@ -84,14 +84,14 @@ btnBorrar.onclick = function() {
 	} else {
 		pantalla.innerHTML = expresion;
 	}
-	
+
 }
 
 btnIgual.onclick = function() {
 	var valCero = expresion.startsWith('0')
-	//switchOn = true;
 	if ( expresion.length != 0 && expresion != '0' ){
 		if ( valCero ){
+			console.log("******** 1.1"+ " expre " +expresion)
 			expresion =  expresion.slice(1);
 			try {
 				var resultado = calcularResultado();
@@ -99,6 +99,7 @@ btnIgual.onclick = function() {
 				errorExpresion();
 			}
 		} else {
+			console.log("******** 1.2"+ " expre " +expresion)
 			try {
 				var resultado = calcularResultado();
 			} catch(error) {
@@ -106,12 +107,16 @@ btnIgual.onclick = function() {
 			}
 		}
 	} else{
+		console.log("******** 2", expresion)
 		pantalla.innerHTML = "= " +expresion;
+		deleteHistorial();
 	}
-	if ( switchOn ){
+	if ( !switchOn ){
+		switchOn = true;
 		crearHistorial();
-		switchOn = false;
+		console.log("1 SWITCH = " +switchOn)
 	}
+
 	lenHisto =  historial.length;
 	if ( lenHisto <= 3 ){
 		añadirHistorial();
@@ -123,12 +128,11 @@ btnIgual.onclick = function() {
 
 btnExpandir.onclick = function() {
 	var parentTeclado = btnIgual.parentNode;
-	let btnMod = document.getElementById("mod");
+	let btn1Agrupar = document.querySelector("#par1");
+	let btn2Agrupar = document.querySelector("#par2");
+	let btnHistory = document.querySelector("#hist");
+	let btnMod = document.querySelector("#mod");
 	if (expandirAdd){
-		let btn1Agrupar = document.getElementById("agr1");
-		let btn2Agrupar = document.getElementById("agr2");
-		let btnHistory = document.getElementById("hist");
-		
 		btn1Agrupar.parentNode.removeChild(btn1Agrupar);
 		btn2Agrupar.parentNode.removeChild(btn2Agrupar);
 		btnHistory.parentNode.removeChild(btnHistory);
@@ -136,29 +140,26 @@ btnExpandir.onclick = function() {
 		parentTeclado.insertBefore(btnExpandir, btnCero)
 		expandirAdd = false;
 	} else{
-		txt1 = "("
-		txt2 = ")"
-		txt3 = "hist"
 		const btn1 = document.createElement("button");
 		const btn2 = document.createElement("button");
 		const btn3 = document.createElement("button");
 		const btnMod = document.createElement("button");
 		btn1.onclick = function(){
-			inicializarExpresion(); 
+			inicializarExpresion();
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
 		btn2.onclick = function(){
-			inicializarExpresion(); 
+			inicializarExpresion();
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
 		btnMod.onclick = function(){
-			inicializarExpresion(); 
+			inicializarExpresion();
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
-		btn3.onclick = function() {	
+		btn3.onclick = function() {
 			if ( switchOnTotal ){
 				divRecord = document.createElement("div");
 				divRecord.className="divRecord";
@@ -170,19 +171,35 @@ btnExpandir.onclick = function() {
 				switchOnTotal = false;
 			} else {
 				divRecord.parentNode.removeChild(divRecord);
-				console.log("FALSO NO AÑADE " +totalHistorial);
 				switchOnTotal = true;
 			}
 		}
+		var txt1 = "("
+		var txt2 = ")"
+		var txt3 = "hist"
+		var txt4 = "Mod"
+		var txt5 = "%"
 		btn1.innerHTML = txt1;
 		btn2.innerHTML = txt2;
 		btn3.innerHTML = txt3;
-		btnMod.innerHTML = "Mod";
-		btn1.id = "agr1";
-		btn2.id = "agr2";
+		btnMod.innerHTML = txt4;
+		//ID
+		btn1.id = "par1";
+		btn2.id = "par2";
 		btn3.id = "hist";
 		btnMod.id = "mod";
-		btnMod.className = "mod";
+		// DATA-TEXTO
+		btn1.dataset.texto = txt1
+		btn2.dataset.texto = txt2
+		btnMod.dataset.texto = txt5
+		// INSERTAR
+		parentTeclado.insertBefore(btnMod, btnCero)
+		parentTeclado.appendChild(btn1);
+		parentTeclado.appendChild(btn2);
+		parentTeclado.appendChild(btn3);
+		parentTeclado.appendChild(btnExpandir);
+		expandirAdd = true;
+		// STYLE
 		btnMod.style.backgroundColor = '#5d82a7';
 		btnMod.addEventListener("mouseover", function (event){
 			event.target.style.backgroundColor = '#FB7E29';
@@ -190,53 +207,8 @@ btnExpandir.onclick = function() {
 		btnMod.addEventListener("mouseout", function (event){
 			event.target.style.backgroundColor = "#5d82a7";
 		})
-		btnMod.setAttributeNS("%", "data-texto", "%");
-		btn1.setAttributeNS("(", "data-texto", "(")
-		btn2.setAttributeNS(")", "data-texto", ")")
-		btn3.setAttributeNS("historial", "data-texto", "record")
-		parentTeclado.insertBefore(btnMod, btnCero)
-		parentTeclado.appendChild(btn1);
-		parentTeclado.appendChild(btn2);
-		parentTeclado.appendChild(btn3);
-		parentTeclado.appendChild(btnExpandir);
-		expandirAdd = true;
 	}
 }
-/////////////////////////////////////////////////////////////////////////
-// EVENTOS DEL TECLADO
-Mousetrap.bind("enter", function() {
-	btnIgual.click();
-})
-Mousetrap.bind("r", function() {
-	btnReset.click();
-})
-Mousetrap.bind("backspace", function() {
-	btnBorrar.click();
-})
-Mousetrap.bind("s", function() {
-	btnSeta.click();
-})
-Mousetrap.bind("ñ", function() {
-	if (!voltea){
-		calculadora.style.transform = "rotate(180deg)";
-		voltea = true;
-	} else {
-		calculadora.style.transform = "rotate(0deg)";
-		voltea = false;
-	}
-})
-Mousetrap.bind("(", function() {
-	texto = "("
-	inicializarExpresion(); 
-	expresion += texto;
-	pantalla.innerHTML = expresion;
-})
-Mousetrap.bind(")", function() {
-	texto = ")"
-	inicializarExpresion(); 
-	expresion += texto;
-	pantalla.innerHTML = expresion;
-})
 
 function errorExpresion() {
 	pantalla.innerHTML = "Error : Expresión malformada";
@@ -250,7 +222,6 @@ function errorExpresion() {
 
 function calcularResultado() {
 	var resultado = eval(expresion);
-	console.log("RESULTADO :" + resultado);
 	pantalla.innerHTML = "= " + resultado.toString().substr(0, 12);
 	igual = "= " + resultado;
 	historial.push(expresion);
@@ -259,10 +230,12 @@ function calcularResultado() {
 }
 
 function crearHistorial() {
-	divHistorial = document.createElement("div");
-	divHistorial.className = "historial";
-	var parentPantalla = pantalla.parentNode;
-	parentPantalla.insertBefore(divHistorial, pantalla);
+	if ( switchOn ){
+		divHistorial = document.createElement("div");
+		divHistorial.className = "historial";
+		var parentPantalla = pantalla.parentNode;
+		parentPantalla.insertBefore(divHistorial, pantalla);
+	}
 }
 
 function añadirHistorial() {
@@ -274,20 +247,30 @@ function añadirHistorial() {
 function deleteHistorial(){
 	console.log("SWITH ", switchOn)
 	console.log("HISTYRIAL ", historial.length)
-	if ( historial.length != 0 ){
+	if ( historial.length == '0' && switchOn ){
+		console.log("------> 1")
+		//switchOn = false;
+	}else if ( historial.length != 0 ){
+		console.log("------> 2")
 		divHistorial.parentNode.removeChild(divHistorial);
-		//historial = [];
-		switchOn = true;
-	}else if ( !switchOn ){
-		divHistorial.parentNode.removeChild(divHistorial);
-		console.log("longitud " +historial.length)
-		console.log("SWITH -- ", switchOn);
-		switchOn = true;
-	} else if ( switchOn && historial.length == '0' ){
-		console.log("INICIO", divHistorial)
+		historial = [];
 		switchOn = false;
-		//divHistorial.parentNode.removeChild(divHistorial);
 	}
+	inicializarExpresion();
+	// }else if ( !switchOn ){
+	// 	switchOn = true;
+	// 	console.log("-----> 2")
+	// 	divHistorial.parentNode.removeChild(divHistorial);
+	// 	console.log("longitud " +historial.length)
+	// 	console.log("SWITH -- ", switchOn);
+	// } else if ( switchOn && historial.length == '0' ){
+	// 	console.log("------> 3")
+	// 	console.log("INICIO", divHistorial)
+	// 	switchOn = false;
+	// 	//divHistorial.parentNode.removeChild(divHistorial);
+	// }
+	//expresion = '0';
+	//console.log("QUE TIENE EXPRESION " +expresion)
 }
 
 function inicializarExpresion() {
@@ -300,7 +283,56 @@ function inicializarExpresion() {
 		cero = "1";
 		igual = "";
 	}
+	
 }
 /////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+// EVENTOS DEL TECLADO
+Mousetrap.bind("enter", function() {
+	btnIgual.click();
+})
 
+Mousetrap.bind("r", function() {
+	btnReset.click();
+})
 
+Mousetrap.bind("backspace", function() {
+	btnBorrar.click();
+})
+
+Mousetrap.bind("s", function() {
+	btnSeta.click();
+})
+
+Mousetrap.bind("ñ", function() {
+	if (!voltea){
+		calculadora.style.transform = "rotate(180deg)";
+		voltea = true;
+	} else {
+		calculadora.style.transform = "rotate(0deg)";
+		voltea = false;
+	}
+})
+
+Mousetrap.bind("l", function() {
+	btnExpandir.click();
+})
+
+Mousetrap.bind("(", function() {
+	texto = "("
+	inicializarExpresion();
+	expresion += texto;
+	pantalla.innerHTML = expresion;
+})
+
+Mousetrap.bind(")", function() {
+	texto = ")"
+	inicializarExpresion();
+	expresion += texto;
+	pantalla.innerHTML = expresion;
+})
+// WEB
+/*
+https://craig.is/killing/mice
+https://bestofjs.org/
+*/
