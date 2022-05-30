@@ -9,7 +9,7 @@ let btnBorrar = document.querySelector("[data-accion='borrar']");
 let btnIgual = document.querySelector("[data-accion='igual']");
 let arrBtnTexto = document.querySelectorAll("[data-texto]");
 let btnExpandir = document.getElementById('expandir');
-
+let btnCero =  document.querySelector(".zero")
 ///////////////////////////////////////////////////////////////////////////////
 // VARIABLES GLOBALES
 let expresion = "0";
@@ -59,8 +59,7 @@ btnReset.onclick = function(evento) {
 	console.log(btnReset.innerHTML);
 	if ( btnReset.innerHTML == "AC" ){
 		btnReset.innerHTML = "AC";
-		console.log(btnReset.innerHTML);
-		if (historial.length != 0) {
+		if ( historial != 0 ){
 			deleteHistorial();
 		}
 	}else{
@@ -116,13 +115,17 @@ btnIgual.onclick = function() {
 }
 
 btnExpandir.onclick = function() {
-	let btn1Agrupar = document.getElementById("agr1");
-	let btn2Agrupar = document.getElementById("agr2");
-	let btnHistory = document.getElementById("hist");
+	var parentTeclado = btnIgual.parentNode;
 	if (expandirAdd){
+		let btn1Agrupar = document.getElementById("agr1");
+		let btn2Agrupar = document.getElementById("agr2");
+		let btnHistory = document.getElementById("hist");
+		let btnMod = document.querySelector(".mod");
 		btn1Agrupar.parentNode.removeChild(btn1Agrupar);
 		btn2Agrupar.parentNode.removeChild(btn2Agrupar);
 		btnHistory.parentNode.removeChild(btnHistory);
+		btnMod.parentNode.removeChild(btnMod);
+		parentTeclado.insertBefore(btnExpandir, btnCero)
 		expandirAdd = false;
 	} else{
 		txt1 = "("
@@ -131,12 +134,18 @@ btnExpandir.onclick = function() {
 		const btn1 = document.createElement("button");
 		const btn2 = document.createElement("button");
 		const btn3 = document.createElement("button");
+		const btnMod = document.createElement("button");
 		btn1.onclick = function(){
 			inicializarExpresion(); 
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
 		btn2.onclick = function(){
+			inicializarExpresion(); 
+			expresion += this.dataset.texto;
+			pantalla.innerHTML = expresion;
+		}
+		btnMod.onclick = function(){
 			inicializarExpresion(); 
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
@@ -153,17 +162,21 @@ btnExpandir.onclick = function() {
 		btn1.innerHTML = txt1;
 		btn2.innerHTML = txt2;
 		btn3.innerHTML = txt3;
+		btnMod.innerHTML = "Mod";
 		btn1.id = "agr1";
 		btn2.id = "agr2";
 		btn3.id = "hist";
+		btnMod.className = "mod";
+		btnMod.style.backgroundColor = '#24588d';
+		btnMod.setAttributeNS("%", "data-texto", "%");
 		btn1.setAttributeNS("(", "data-texto", "(")
 		btn2.setAttributeNS(")", "data-texto", ")")
 		btn3.setAttributeNS("historial", "data-texto", "record")
-
-		var parentDiv = btnExpandir.parentNode;
-		parentDiv.insertBefore(btn1, btnExpandir);
-		parentDiv.insertBefore(btn2, btnExpandir);
-		parentDiv.insertBefore(btn3, btnExpandir);
+		parentTeclado.insertBefore(btnMod, btnCero)
+		parentTeclado.appendChild(btn1);
+		parentTeclado.appendChild(btn2);
+		parentTeclado.appendChild(btn3);
+		parentTeclado.appendChild(btnExpandir);
 		expandirAdd = true;
 	}
 }
@@ -205,8 +218,8 @@ Mousetrap.bind(")", function() {
 function crearHistorial() {
 	divHistorial = document.createElement("div");
 	divHistorial.className = "historial";
-	var parentDiv = pantalla.parentNode;
-	parentDiv.insertBefore(divHistorial, pantalla);
+	var parentPantalla = pantalla.parentNode;
+	parentPantalla.insertBefore(divHistorial, pantalla);
 }
 
 function añadirHistorial() {

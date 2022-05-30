@@ -94,11 +94,14 @@ body {
 .teclado button[data-texto="*"],
 .teclado button[data-texto="/"],
 .teclado button[data-texto="-"],
-.teclado button[data-texto="+"],
-.teclado button[data-texto="%"]
+.teclado button[data-texto="+"]
 {
 	background-color: #5d82a7;
 	color: white;
+}
+.mod {
+	background-color: #24588d;
+	color: rgb(187, 24, 24);
 }
 
 .teclado button[data-texto="*"]:hover,
