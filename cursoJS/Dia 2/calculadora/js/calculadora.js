@@ -13,14 +13,22 @@ let btnCero =  document.querySelector(".zero")
 ///////////////////////////////////////////////////////////////////////////////
 // VARIABLES GLOBALES
 let expresion = "0";
+// Variable donde me hara de switch, y saber si el primer caracter es 0
 let cero = "0";
 let igual = "";
 var voltea = false;
 var expandirAdd = false;
+// variable para crear un DIV y añadir el historial
 var divHistorial = ""
+var divRecord = ""
+
+// Array que solo almacenara 3 datos del historial
 let historial = []
+// Array que almacenara todo el historial
 let totalHistorial = []
+// switch que activar si esta creado el historial o no
 var switchOn = true;
+var switchOnTotal = true;
 ////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +39,7 @@ for(let item of arrBtnTexto) {
 		expresion += this.dataset.texto;
 		pantalla.innerHTML = expresion;
 		btnReset.innerHTML = "C";
+		console.log(expresion)
 	}
 	
 	let caracter = item.dataset.texto;
@@ -42,26 +51,22 @@ for(let item of arrBtnTexto) {
 	})
 	
 }
-////////////////////////////////////////////////////////////////////////////////
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // EVENTOS CLICK PARA BOTONES ESPECIALES
 btnSeta.onclick = function() {
+	console.log("INSPIRATE")
 }
 
-btnReset.onclick = function(evento) {
+btnReset.onclick = function() {
 	expresion = "0";
 	pantalla.innerHTML = expresion;
 	cero = "0";
 	igual = "";
-	console.log(btnReset.innerHTML);
+	inicializarExpresion();
 	if ( btnReset.innerHTML == "AC" ){
 		btnReset.innerHTML = "AC";
-		if ( historial != 0 ){
-			deleteHistorial();
-		}
+		deleteHistorial();
 	}else{
 		btnReset.innerHTML = "AC";
 	}
@@ -83,24 +88,27 @@ btnBorrar.onclick = function() {
 }
 
 btnIgual.onclick = function() {
-	try {
-		var resultado = eval(expresion);
-		if ( expresion == '0' ){
-			pantalla.innerHTML = "= " +expresion;
-			expresion=resultado;
+	var valCero = expresion.startsWith('0')
+	//switchOn = true;
+	if ( expresion.length != 0 && expresion != '0' ){
+		if ( valCero ){
+			expresion =  expresion.slice(1);
+			try {
+				var resultado = calcularResultado();
+			} catch(error) {
+				errorExpresion();
+			}
 		} else {
-			pantalla.innerHTML = "= " +resultado.toString().substr(0,12);
-			igual = "= " +resultado
-			historial.push(expresion);
-			totalHistorial.push(expresion);
+			try {
+				var resultado = calcularResultado();
+			} catch(error) {
+				errorExpresion();
+			}
 		}
-	} catch(error) {
-		pantalla.innerHTML = "Error";
-		pantalla.style.fontSize = "200%"
-		cero = '0';
-		igual = "";
+	} else{
+		pantalla.innerHTML = "= " +expresion;
 	}
-	if (switchOn){
+	if ( switchOn ){
 		crearHistorial();
 		switchOn = false;
 	}
@@ -111,16 +119,16 @@ btnIgual.onclick = function() {
 		historial.shift()
 		añadirHistorial();
 	}
-	
 }
 
 btnExpandir.onclick = function() {
 	var parentTeclado = btnIgual.parentNode;
+	let btnMod = document.getElementById("mod");
 	if (expandirAdd){
 		let btn1Agrupar = document.getElementById("agr1");
 		let btn2Agrupar = document.getElementById("agr2");
 		let btnHistory = document.getElementById("hist");
-		let btnMod = document.querySelector(".mod");
+		
 		btn1Agrupar.parentNode.removeChild(btn1Agrupar);
 		btn2Agrupar.parentNode.removeChild(btn2Agrupar);
 		btnHistory.parentNode.removeChild(btnHistory);
@@ -150,14 +158,21 @@ btnExpandir.onclick = function() {
 			expresion += this.dataset.texto;
 			pantalla.innerHTML = expresion;
 		}
-		btn3.onclick = function() {
-			const totalRecord = document.createElement("div");
-			totalRecord.className="totalRecord";
-			for ( var i=0; i<totalHistorial.length; i++ ) {
-				totalRecord.innerHTML = totalHistorial.join("<br>");
+		btn3.onclick = function() {	
+			if ( switchOnTotal ){
+				divRecord = document.createElement("div");
+				divRecord.className="divRecord";
+				var parentDiv = calculadora.parentNode;
+				parentDiv.insertBefore(divRecord, calculadora);
+				for ( var i=0; i<totalHistorial.length; i++ ) {
+					divRecord.innerHTML = totalHistorial.join("<br>");
+				}
+				switchOnTotal = false;
+			} else {
+				divRecord.parentNode.removeChild(divRecord);
+				console.log("FALSO NO AÑADE " +totalHistorial);
+				switchOnTotal = true;
 			}
-			var parentDiv = calculadora.parentNode;
-			parentDiv.insertBefore(totalRecord, calculadora);
 		}
 		btn1.innerHTML = txt1;
 		btn2.innerHTML = txt2;
@@ -166,8 +181,15 @@ btnExpandir.onclick = function() {
 		btn1.id = "agr1";
 		btn2.id = "agr2";
 		btn3.id = "hist";
+		btnMod.id = "mod";
 		btnMod.className = "mod";
-		btnMod.style.backgroundColor = '#24588d';
+		btnMod.style.backgroundColor = '#5d82a7';
+		btnMod.addEventListener("mouseover", function (event){
+			event.target.style.backgroundColor = '#FB7E29';
+		})
+		btnMod.addEventListener("mouseout", function (event){
+			event.target.style.backgroundColor = "#5d82a7";
+		})
 		btnMod.setAttributeNS("%", "data-texto", "%");
 		btn1.setAttributeNS("(", "data-texto", "(")
 		btn2.setAttributeNS(")", "data-texto", ")")
@@ -215,6 +237,27 @@ Mousetrap.bind(")", function() {
 	expresion += texto;
 	pantalla.innerHTML = expresion;
 })
+
+function errorExpresion() {
+	pantalla.innerHTML = "Error : Expresión malformada";
+	pantalla.style.fontSize = "150%";
+	pantalla.style.color = "red";
+	cero = '0';
+	igual = "";
+    deleteHistorial();
+
+}
+
+function calcularResultado() {
+	var resultado = eval(expresion);
+	console.log("RESULTADO :" + resultado);
+	pantalla.innerHTML = "= " + resultado.toString().substr(0, 12);
+	igual = "= " + resultado;
+	historial.push(expresion);
+	totalHistorial.push(expresion);
+	return resultado;
+}
+
 function crearHistorial() {
 	divHistorial = document.createElement("div");
 	divHistorial.className = "historial";
@@ -227,14 +270,29 @@ function añadirHistorial() {
 		divHistorial.innerHTML = historial.join("<br>");
 	}
 }
+
 function deleteHistorial(){
-	divHistorial.parentNode.removeChild(divHistorial);
-	historial = []
-	switchOn = true;
+	console.log("SWITH ", switchOn)
+	console.log("HISTYRIAL ", historial.length)
+	if ( historial.length != 0 ){
+		divHistorial.parentNode.removeChild(divHistorial);
+		//historial = [];
+		switchOn = true;
+	}else if ( !switchOn ){
+		divHistorial.parentNode.removeChild(divHistorial);
+		console.log("longitud " +historial.length)
+		console.log("SWITH -- ", switchOn);
+		switchOn = true;
+	} else if ( switchOn && historial.length == '0' ){
+		console.log("INICIO", divHistorial)
+		switchOn = false;
+		//divHistorial.parentNode.removeChild(divHistorial);
+	}
 }
 
 function inicializarExpresion() {
 	pantalla.style.fontSize = "300%"
+	pantalla.style.color = "black"
 	valorExpresionInicial = cero.startsWith('0')
 	valorResultadoInicial = igual.startsWith('=')
 	if (valorExpresionInicial || valorResultadoInicial) {
@@ -243,7 +301,6 @@ function inicializarExpresion() {
 		igual = "";
 	}
 }
-
 /////////////////////////////////////////////////////////////////////////
 
 

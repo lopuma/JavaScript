@@ -25,20 +25,17 @@ body {
 	box-shadow: 0 10px 10px 0 rgba(0,0,0,0.4);
 	/* transform: rotate(180deg); */
 }
+
 .historial {
 	height: 100px;
-	background-color: #f7fbfc;
+	background-color: linear-gradient(to bottom,  #f7fbfc 0%,#dee4ed 57%,#c5d2e0 100%);
 	color: black;
-	/* border: 8px solid #333;
-	border-radius: 6px;
-	margin-bottom: 20px;
-	box-shadow: inset 0 4px 5px 0 rgba(0, 0, 0, 0.4);
-	 */
 	display: flex; align-items: center; justify-content: flex-end;
 	padding: 0 12px;
 	font-size: 200%; font-family: monospace;
 }
-.totalRecord {
+
+.divRecord {
 	background-color: #fff;
 	font-size: 200%; font-family: monospace;
 	width: 300px;
@@ -62,16 +59,19 @@ body {
 	padding: 0 12px;
 	font-size: 300%; font-family: monospace;
 }
+
 .teclado {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-auto-rows: 50px;
 	gap: 10px;
 }
+
 .teclado button:hover {
 	background-color: #FB7E29;
 	color: #fff;
-	}
+}
+
 .teclado button {
 	border: 2px solid #333;
 	border-radius: 4px;
@@ -79,18 +79,23 @@ body {
 	background-color: #DDD;
 	box-shadow: inset 0 2px 1px 0 rgba(255, 255, 255, .6), 
 		inset 0 -2px 1px 0 rgba(0,0,0, .4);
+
 }
+
 .teclado button:active {
 	filter: brightness(90%);
 }
+
 .teclado button[data-accion] {
 	background-color: #444;
 	color: white;
 }
+
 .teclado button[data-accion]:hover {
 	background-color: #FB7E29;
 	color: #fff;
-	}
+}
+
 .teclado button[data-texto="*"],
 .teclado button[data-texto="/"],
 .teclado button[data-texto="-"],
@@ -99,10 +104,16 @@ body {
 	background-color: #5d82a7;
 	color: white;
 }
+
 .mod {
 	background-color: #24588d;
-	color: rgb(187, 24, 24);
+	color: #DDD;
 }
+
+.mod button:hover {
+	background-color: #FB7E29;
+	color: #fff;
+	}
 
 .teclado button[data-texto="*"]:hover,
 .teclado button[data-texto="/"]:hover,
