@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Calculadora LOPUMA</title>
 	<link rel="stylesheet" href="css/calculadora.css">
 </head>
 <body>
@@ -10,7 +10,7 @@
 		<div class="pantalla">0</div>
 		<div class="teclado">
 			<button data-accion="seta">🍄</button>
-			<button data-accion="reset">C</button>
+			<button data-accion="reset">AC</button>
 			<button data-accion="borrar">DEL</button>
 			<button data-texto="*">×</button>
 			<button data-texto="7">7</button>
@@ -25,13 +25,16 @@
 			<button data-texto="2">2</button>
 			<button data-texto="3">3</button>
 			<button data-texto="+">+</button>
-			<button data-texto="%">Mód</button>
-			<button data-texto="0">0</button>
+			<!-- <button data-texto="%">Mód</button> -->
+			<input type="button", id="expandir" class="expandir" />
+			<button data-texto="0" class="zero">0</button>
 			<button data-texto=".">.</button>
 			<button data-accion="igual">=</button>
+			
+			<!-- <button id="expandir">Exp</button>*/ -->
 		</div>
 	</div>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.6.5/mousetrap.min.js"></script>
 	<script src="js/calculadora.js"></script>
 

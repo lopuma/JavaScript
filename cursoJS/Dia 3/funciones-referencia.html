@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // Puedo crear una función normal y llamarla normalmente:
+        let yuyu = function(parametro) {
+            console.log(new Date().toLocaleString() );
+            return parametro + "::::::"+Math.random();
+        }
+
+        // Pero también puedo crear REFERENCIAS a funciones. Una referencia es como un alias
+        let pipo = yuyu;
+        // OJO!!! Para crear una referencia NO DEBES INCLUIR LOS PARÉNTESIS EN YUYU
+        //let pipo = yuyu("Fecha");
+
+
+        // Las referencias a funciones vienen muy bien para simplificar el código. Pongamos por caso una cuenta atrás:
+        setTimeout(call1, 2000);
+        function call1(){
+            console.log("Se ha llegado al final de la cuenta atrás");
+            setTimeout(call2, 2000);
+        }
+        function call2(){
+            document.body.style.backgroundColor = "beige";
+            setTimeout(call3, 2000);
+        }
+        function call3(){
+            document.body.innerHTML = "Hale, a cascarla!";
+        }
+    </script>
+
+
+</body>
+</html>

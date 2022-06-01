@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="producto1" data-precio="232.34" data-descuento="15"><h3>Buñuelos de Tasmania</h3></div>
+
+
+    <script>
+        let producto1 = document.querySelector(".producto1");
+
+        // En JS, puedo acceder al contenido de los atributos personalizados mediante la propiedad "dataset", que es un objeto con lo que en html viene después de "data-"
+        console.log(producto1.dataset.precio);
+        console.log(producto1.dataset.descuento);
+
+        // Del mismo modo, puedo cambiar o crear atributos personalizados desde JS
+        producto1.dataset.extra = "XXL";
+        
+
+    </script>
+</body>
+</html>

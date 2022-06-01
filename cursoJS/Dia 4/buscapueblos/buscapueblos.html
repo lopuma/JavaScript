@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Buscapueblos 1.0</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+	<link rel="stylesheet" href="css/buscapueblos.css">
+</head>
+<body>
+	<header>
+		<h1>Buscapueblos 1.0</h1>
+	</header>
+	<nav>
+		<select name="provincias" id="provincias">
+			<option value="0">Selecciona provincia</option>
+		</select>
+
+		<select name="municipios" id="municipios">
+			<option value="0">Selecciona municipio</option>
+		</select>
+	</nav>
+	<main>
+		<section id="seccion1">
+			<a href="#">
+				<i class="fas fa-play"></i>
+				<span>Información</span>
+			</a>
+			<iframe src="vacio.html" id="detalle" resize="yes"></iframe>
+		</section>
+		<section id="seccion2" class="abierto">
+			<a href="#">
+				<i class="fas fa-play"></i>
+				<span>Ubicación</span>
+			</a>
+			<div id="mapa"></div>
+		</section>
+	</main>
+	<!-- Cargamos la librería Leaflet -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script>
+		//////////////////////////////////////////////////////////
+		// REFERENCIAS Y VARIABLES GLOBALES
+		var provincias = document.querySelector("#provincias");
+		var municipios = document.querySelector("#municipios");
+		var detalle = document.querySelector("#seccion1 > iframe");
+		var seccion1 = document.querySelector("#seccion1");
+		var seccion2 = document.querySelector("#seccion2");
+		//////////////////////////////////////////////////////////
+		
+		
+		//////////////////////////////////////////////////////////
+		// FUNCIONES GENÉRICAS
+		function obtenerProvincias() {
+			var url="http://www.coavnss.org/api/api.php?comando=provincias";
+			fetch(url)
+				.then(response => response.json())
+				.then(function(datos) {
+					for(var item of datos.data) {
+						provincias.innerHTML += `
+				<option value="${item.id}">${item.provincia}</option>
+				`;
+					}
+				});
+		}
+		
+		function obtenerMunicipios(id) {
+			var url="http://www.coavnss.org/api/api.php?comando=municipios&idProvincia="+id;
+			fetch(url)
+				.then(response => response.json())
+				.then(function(datos) {
+					municipios.innerHTML = "";
+					for(var item of datos.data) {
+						municipios.innerHTML += `
+						<option value="${item.id}" data-latitud="${item.latitud}" data-longitud="${item.longitud}">${item.municipio}</option>
+						`;
+					}
+				});
+		}
+		//////////////////////////////////////////////////////////
+		
+		
+		//////////////////////////////////////////////////////////
+		// EVENTOS
+		seccion1.querySelector("a:first-child").onclick = function() {
+			seccion1.classList.toggle("abierto");
+			seccion2.classList.toggle("abierto");
+		}
+		seccion2.querySelector("a:first-child").onclick = function() {
+			seccion1.classList.remove("abierto");
+			seccion2.classList.toggle("abierto");
+		}
+		provincias.onchange = function() {
+			obtenerMunicipios(provincias.value);
+		}
+		municipios.onchange = function() {
+			var opt = municipios.options[municipios.selectedIndex];
+			detalle.src = "https://es.wikipedia.org/wiki/" + opt.innerHTML;
+			mymap.invalidateSize();
+			mymap = mymap.setView([opt.dataset.latitud, opt.dataset.longitud], 13);
+		}
+		//////////////////////////////////////////////////////////
+		
+		
+		//////////////////////////////////////////////////////////
+		// PUESTA EN MARCHA
+		obtenerProvincias();
+		
+		// Este código crea un mapa de Leaflet con unas coordenadas y nivel de zoom iniciales
+		var mymap = L.map('mapa').setView([43.3259200, -1.9754200], 13);
+		
+		// Ahora tenemos que cargar las imágenes (teselas) de un PROVEEDOR DE MAPAS para Leaflet. Vamos a tirar del proveedor OpenStreetMap.
+		// Cada proveedor tiene una configuración distinta. En el caso de OpenStreetMap, la url de las teselas tiene un formato "raro" (que Leaflet se encarga de interpretar), y hay que añadirle la propiedad attribution para que nos dé permiso para cargar las teselas. 
+		// En otros proveedores, tenemos que añadir una propiedad más con nuestro ID de usuario, que podría ser de pago
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(mymap);
+		// Finalmente añadimos ese conjunto de teselas al mapa de Leaflet que hemos creado con .addTo(mymap)
+		//////////////////////////////////////////////////////////
+	</script>
+</body>
+</html>

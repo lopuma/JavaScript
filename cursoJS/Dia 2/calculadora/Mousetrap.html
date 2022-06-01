@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center; align-items: center;
+        }
+        .caja {
+            width: 200px; height: 200px; border: 1px solid black;
+            font-size: 100px; 
+            display: flex;
+            justify-content: center; align-items: center;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="caja"></div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.6.5/mousetrap.min.js"></script>
+    <script>
+        // Ejemplo de uso de la librería Mousetrap
+        // https://craig.is/killing/mice
+        const caja = document.querySelector(".caja");
+        Mousetrap.bind("ctrl+a", function() {
+            caja.innerHTML = "a"
+        })
+        Mousetrap.bind("left", function() {
+            caja.innerHTML = "Iz"
+        })
+        Mousetrap.bind("right", function() {
+            caja.innerHTML = "Dc"
+        })
+        Mousetrap.bind("up", function() {
+            caja.innerHTML = "Ar"
+        })
+        Mousetrap.bind("down", function() {
+            caja.innerHTML = "Ab"
+        })
+    </script>
+</body>
+</html>

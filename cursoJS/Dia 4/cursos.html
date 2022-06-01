@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ofertas de CURSOS de Lanbide</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+	<nav>
+		<h1>Lanbide: ofertas de Cursos</h1>
+		<div>
+			<select id="selMunicipios">
+				<option value="0">Selecciona un municipio</option>
+			</select>
+			<input type="text" id="txtTermino" placeholder="Término de búsqueda">
+			<button id="btnOk"><i class="fa-solid fa-magnifying-glass"></i></button>
+			<button id="btnReset"><i class="fa-solid fa-rotate"></i></button>
+		</div>
+	</nav>
+	<main>
+
+	</main>
+	<button id="verMas" class="oculto">Ver más...</button>
+	<script src="js/cursos.js"></script>
+	<script src="http://apps.lanbide.euskadi.net/apps/FR_CURSOS_ODE_JSON?jsonCallBack=cursosLanbide"></script>
+</body>
+</html>
