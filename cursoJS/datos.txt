@@ -1,2 +1,22 @@
 "color" : "#58a6ff"
 conceptp de BISON
+
+#todo DIA 5
+
+ajax va anclado a las API
+
+// declarar una array en JS
+
+var personas = []
+personas.nombre = "Pepe";
+// o
+personas["nombre"] = "Pepe";
+
+
+// No tener que recargar la pagina entera existe:
+// objecto de comunicaciones con el servidor de JS, es ajax
+// es la tecnica de uso de un objeto llamado XMLHTTpRequest
+// el problema de XML no es legible.
+ 
+ // DATA : los datos
+ // META : respuesta del servidor 

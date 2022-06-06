@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .caja {
+            display: inline-block;
+            border: 1px solid #CCC;
+            padding: 8px;;
+        }
+    </style>
+</head>
+<body>
+    <select id="listado"></select>
+    <div id="salida"></div>
+
+    <script>
+        const listado = document.querySelector("#listado");
+        const salida = document.querySelector("#salida");
+
+        let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+        let ajax = new XMLHttpRequest();
+        ajax.open("GET", url);
+        ajax.send(); 
+        ajax.addEventListener("load", datosRecibidos);
+        function datosRecibidos() {
+            var datos = JSON.parse(this.responseText);
+            console.log(datos);
+            for(var item of datos.data) {
+                listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+            }
+        }
+
+        // Ejercicio: crea código para que, cuando seleccionemos una provincia de ese <select>, se pida por Ajax la lista de municipios de esa provincia, y sácala por la consola.
+        // La url para pedir los municipios de Gipuzkoa sería esta:
+        //http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=20
+        // 20 = Gipuzkoa
+
+        listado.onchange = function() {
+            var url = "http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=" + this.value;
+            console.log(url);
+            let ajax2 = new XMLHttpRequest();
+            ajax2.open("GET", url);
+            ajax2.send(); 
+            ajax2.addEventListener("load", function() {
+                var datos = JSON.parse(this.responseText);
+                console.log(datos);
+                salida.innerHTML = "";
+                for(var item of datos.data) {
+                    salida.innerHTML += `<span class="caja">${item.municipio}</span>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

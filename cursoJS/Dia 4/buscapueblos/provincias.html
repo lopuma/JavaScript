@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="listado"></select>
+
+    <script>
+        const listado = document.querySelector("#listado");
+        // Ahora quiero hacer una llamada a la API para obtener el listado de provincias. Desde el propio JS, sin recargar la página. ¿Cómo?
+        // Mediante AJAX (invento de M$ en los 90). Técnicamente es el uso de un objeto llamado XMLHttpRequest. Usaba XML para intercambiar datos. Problema: es un COÑAZO para trabajar en el cliente (y a veces en el servidor). Más adelante se usó JSON en lugar de XML. Pero el objeto XMLHttpRequest ha seguido siendo el mismo
+
+        let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+        let ajax = new XMLHttpRequest();
+        // Aquí open no es "abrir", sino "establecer conexión con servidor"
+        ajax.open("GET", url); // Usamos el verbo HTTP GET
+        ajax.send(); // Mandamos la petición
+        // Y ahora usaremos una función callback para cuando llegue la respuesta del servidor...
+        ajax.addEventListener("load", datosRecibidos);
+        function datosRecibidos() {
+            // "this" es una referencia al objeto que ha llamado a esta función. O sea, el XMLHttpRequest. 
+            // responseText contiene la respuesta del servidor en texto plano
+            console.log(this.responseText);
+            // Como sé que es una cadena JSON, la puedo convertir en datos nativos
+            var datos = JSON.parse(this.responseText);
+            console.log(datos);
+            // Ahora puedo usar estos datos para rellenar el <ul>:
+            for(var item of datos.data) {
+                listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+            }
+        }
+
+        // Ejercicio: crea código para que, cuando seleccionemos una provincia de ese <select>, se pida por Ajax la lista de municipios de esa provincia, y sácala por la consola.
+        // La url para pedir los municipios de Gipuzkoa sería esta:
+        //http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=20
+        // 20 = Gipuzkoa
+    </script>
+</body>
+</html>

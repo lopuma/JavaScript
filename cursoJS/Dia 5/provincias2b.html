@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="listado"></select>
+
+    <script>
+        const listado = document.querySelector("#listado");
+
+        let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+        // Esto de las promesas no ha resultado como prometían (jujuju...)
+        // Se puede hacer el código un poco más conciso si usamos FUNCIONES ARROW (nos meteremos con ellas más adelante)...
+        fetch(url)
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+                console.log(datos);
+                for(var item of datos.data) {
+                    listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+                }
+            })
+            .catch(error => console.log(error));
+        // Las funciones arrow sirven para abreviar un poco.
+        // A costa de perder legibilidad.
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="listado"></select>
+
+    <script>
+        const listado = document.querySelector("#listado");
+
+        let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+        // La forma antigua de usar Ajax es propensa a meternos en el infierno de los callbacks, sobre todo si tenemos llamadas ajax que dependen de otras llamadas anteriores.
+        // JS creó un intento de evitar el infierno de los callbacks, llamado PROMESAS. Aparentemente muy elegante. Pero...
+        fetch(url)
+            .then(function(respuesta) {
+                return respuesta.json();
+            })
+            .then(function(datos) {
+                console.log(datos);
+                for(var item of datos.data) {
+                    listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+                }
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
+        // ¿Realmente esto aporta más claridad al código? Más bien parece un intento fracasado.
+    </script>
+</body>
+</html>

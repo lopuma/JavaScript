@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="listado"></select>
+
+    <script>
+        const listado = document.querySelector("#listado");
+
+        let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+        let yuyu;
+
+        // Vamos a probar una última técnica...
+        async function pillaDatos() {
+            let respuesta = await fetch(url);
+            yuyu = await respuesta.json();
+            for(let item of yuyu.data) {
+                listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+            }
+        }
+
+        pillaDatos();
+        // ¿Qué? Mucho mejor, ¿no?
+        // Pues en el fondo es lo mismo que las promesas del ejemplo anterior
+        // Lo que pasa es que se escriben de una forma nueva, implementada por la ECMA en la versión de JS de 2018(?) para escribir el código como si fuera síncrono. Es decir, una cosa después de la otra
+        // Este es el Ajax más avanzado y nuevo que hay ahora mismo.
+
+        // En este código, todo lo asíncrono irá dentro de una FUNCIÓN marcada con el prefijo "async"
+        // Dentro de esa función, podemos usar "await" cuando queremos que la ejecución se detenga en una línea hasta que se haya completado para pasar a la siguiente
+        // Es decir, dentro de una función async escribimos el código a la manera síncrona.
+    </script>
+</body>
+</html>
