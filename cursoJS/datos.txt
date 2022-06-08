@@ -20,3 +20,8 @@ personas["nombre"] = "Pepe";
  
  // DATA : los datos
  // META : respuesta del servidor 
+
+// ASYNC
+/*
+Para derteminar la palabra await
+*/

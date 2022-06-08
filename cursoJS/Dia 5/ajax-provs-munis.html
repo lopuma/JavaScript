@@ -4,29 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Provincias</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Document</title>
     <style>
         .caja {
+            display: inline-block;
             border: 1px solid #CCC;
-            padding: 15px;;
+            padding: 8px;;
         }
     </style>
 </head>
 <body>
-    <select id="listado"  class="form-select" aria-label="Default select example"></select>
-    <!-- <div id="salida" class="d-flex flex-wrap"></div> -->
-    <select id ="salida" class="form-select" multiple aria-label="multiple select example"></select>
-    <div class="mensaje">  
-        <br>
-        <h1>Email : </h1><input type="email" id="email">
-        <br>
-        <h1>Asunto :</h1><input type="text" id="asunto">
-        <br>
-        <h1>Mensaje :</h1><textarea id="mensaje"></textarea>
-    </div>
-    <br>
-    <button id="enviar" type="button" class="btn btn-success">Success</button>
+    <select id="listado"></select>
+    <div id="salida"></div>
+
     <script>
         // Referencias a cosas de la página
         const listado = document.querySelector("#listado");
@@ -77,32 +67,8 @@
             salida.innerHTML = "";
             // Y ahora sí, voy recorriendo datos.data y añadiendo algo de html a ese <div>
             for(var item of datos.data) {
-                salida.innerHTML += `<option value="${item.id}">${item.municipio}</option>`;
+                salida.innerHTML += `<span class="caja">${item.municipio}</span>`;
             }
-        }
-
-        enviar.onclick = function() {
-            //http://www.coavnss.org/api/api.php?comando=email&a=lopumacp@hotmail.com&asunto=prueba&mensaje=hola lopuma
-            //var url = "http://www.coavnss.org/api/api.php?comando=email&a=lopumacp@hotmail.com&asunto=prueba&mensaje=hola lopuma";
-            var email = document.querySelector("#email").value
-            var asunto = document.querySelector("#asunto").value
-            var mensaje = document.querySelector("#mensaje").value
-            console.log(url)
-            console.log(email)
-            console.log(asunto)
-            console.log(mensaje)
-            var url = "http://www.coavnss.org/api/api.php?comando=email&a="+email+"&asunto="+asunto+"&mensaje="+mensaje;
-            console.log(url)
-            let ajax3 = new XMLHttpRequest();
-            ajax3.open("GET", url);
-            ajax3.send(); 
-            ajax3.addEventListener("load", enviado);
-            message = "Mensaje enviado a : " + email;
-            alert(message, 'success');
-        }
-
-        function enviado() {
-            console.log(this.responseText)
         }
     </script>
 </body>

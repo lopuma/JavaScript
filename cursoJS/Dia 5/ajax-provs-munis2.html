@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .caja {
+            display: inline-block;
+            border: 1px solid #CCC;
+            padding: 8px;;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="cargaProvincias()">A ver...</button>
+    <select id="listado"></select>
+    <div id="salida"></div>
+
+    <script>
+        const listado = document.querySelector("#listado");
+        const salida = document.querySelector("#salida");
+
+        // Vamos a usar el ajax modelno. Fetch
+        async function cargaProvincias() {
+            let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+            let respuesta = await fetch(url);
+            let datos = await respuesta.json();
+            provinciasCargadas(datos);
+        }
+        
+        listado.onchange = async function() {
+            var url = "http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=" + this.value;
+            let respuesta = await fetch(url);
+            let datos = await respuesta.json();
+            municipiosCargados(datos);
+        }
+
+
+
+        function provinciasCargadas(datos) {
+            for(var item of datos.data) {
+                listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+            }
+        }
+
+        function municipiosCargados(datos) {
+            salida.innerHTML = "";
+            for(var item of datos.data) {
+                salida.innerHTML += `<span class="caja">${item.municipio}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

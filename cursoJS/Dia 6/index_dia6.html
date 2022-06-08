@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANIMES</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+        body {
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <button id="new" type="button" class="btn btn-success">Nueva IMAGEN</button>
+    <div id="salida"  class="mx-auto" style="width: 500px;"></div>
+    <script>
+        const nueva = document.querySelector("#new");
+        const salida = document.querySelector("#salida");
+        async function pillaDatos() {
+            let url2 = " https://api.waifu.pics/sfw/shinobu"
+            let respuesta2 = await fetch(url2);
+            let datos2 = await respuesta2.json();
+            let url =  "https://api.catboys.com/img";
+            let respuesta = await fetch(url);
+            let datos = await respuesta.json();
+
+            console.log(datos2.url);
+            salida.innerHTML = `
+            <br>
+            <img src="${datos2.url}" class="img-thumbnail">
+            `;
+        }
+
+        nueva.onclick = function() {
+            pillaDatos();
+        }
+    </script>
+</body>
+</html>

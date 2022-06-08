@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="salida"></div>
+
+    <script>
+        const salida = document.querySelector("#salida");
+        async function pillaDatos() {
+            let url = "https://cataas.com/cat?json=true";
+            let respuesta = await fetch(url);
+            let datos = await respuesta.json();
+
+            console.log(datos);
+            salida.innerHTML = `
+            <img src="https://cataas.com${datos.url}">
+            `;
+        }
+
+        pillaDatos();
+    </script>
+</body>
+</html>

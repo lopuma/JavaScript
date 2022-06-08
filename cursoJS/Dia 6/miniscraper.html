@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="salida"></div>
+
+    <script>
+        const salida = document.querySelector("#salida");
+        async function pillaDatos() {
+            let url = "https://frontendfoc.us/issues/545";
+            let respuesta = await fetch(url);
+            // La respuesta del ajax en este caso no es una cadena JSON, por lo que la convertiré a texto plano...
+            let datos = await respuesta.text();
+            //console.log(datos);
+
+            // Hay una API por ahí llamada DOMParser
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(datos, "text/html");
+            //console.log(doc);
+            let parrafos = doc.querySelectorAll("p.desc");
+            console.log(parrafos);
+            // parrafos es un array de todos los <p> que tienen la clase "desc". Los puedo recorrer con un bucle y hacer cositas con ellos...
+            for(let item of parrafos) {
+                salida.innerHTML += `
+                <div>${item.innerHTML}</div>
+                <hr>
+                `;
+            }
+        }
+
+        pillaDatos();
+    </script>
+</body>
+</html>
