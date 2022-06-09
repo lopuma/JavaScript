@@ -20,13 +20,15 @@
         const salida = document.querySelector("#salida");
         async function pillaDatos() {
             let url2 = " https://api.waifu.pics/sfw/shinobu"
+            //let url2 = "https://anime-facts-rest-api.herokuapp.com/api/v1"
             let respuesta2 = await fetch(url2);
             let datos2 = await respuesta2.json();
             let url =  "https://api.catboys.com/img";
             let respuesta = await fetch(url);
             let datos = await respuesta.json();
+            console.log(datos.url);
 
-            console.log(datos2.url);
+            console.log(typeof(datos2));
             salida.innerHTML = `
             <br>
             <img src="${datos2.url}" class="img-thumbnail">
