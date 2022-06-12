@@ -1,0 +1,567 @@
+{
+    "AFB": [
+        {
+            "object": "/home/afb-md/.ssh/id_rsa",
+            "owner": "afb-md",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Usuario de aplicativo"
+            ],
+            "SO": "Linux"
+        }
+    ],
+    "CESCE": [
+        {
+            "object": "/cescelink/usuario/home/usuario/.ssh/id_rsa",
+            "owner": "usuario",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Usuario de prueba para el cliente"
+            ],
+            "SO": "Linux"
+        },
+        {
+            "object": "/home/apps/.ssh/id_rsa",
+            "owner": "apps",
+            "tipo": "/C/",
+            "ownerGroup": "APPS",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Usuario de prueba para el cliente"
+            ],
+            "SO": "Linux"
+        },
+        {
+            "object": "/home/grid/.ssh/id_rsa",
+            "owner": "grid",
+            "tipo": "/F/",
+            "ownerGroup": "Oracle DBA",
+            "user": [
+                "Daniel Castroverde",
+                "JUAN MANUEL RODRIGUEZ IGLESIAS",
+                "LUIS MIGUEL CALLES SANCHEZ"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers RAC Oracle", 
+                "INFLIORAPRE03",
+                "INFLIORAPRE01",
+                "INFLIORAPRE04",
+                "INFLIORAPRO01",
+                "INFLIORAPRE02",
+                "INFLIORAPRO02"
+            ],
+            "risk": "GENERICO / ID_RSA / RAC Oracle",
+            "impact": "GENERICO / ID_RSA / RAC Oracle",
+            "variable": [
+                "Cuenta para Oracle DBA"            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/oracle/.ssh/id_rsa",
+            "owner": "oracle",
+            "tipo": "/F/",
+            "ownerGroup": "Oracle DBA",
+            "user": [
+                "Daniel Castroverde",
+                "JUAN MANUEL RODRIGUEZ IGLESIAS",
+                "LUIS MIGUEL CALLES SANCHEZ"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers RAC Oracle", 
+                "INFLIORAPRE03",
+                "INFLIORAPRE01",
+                "INFLIORAPRE04",
+                "INFLIORAPRO01",
+                "INFLIORAPRE02",
+                "INFLIORAPRO02"
+            ],
+            "risk": "GENERICO / ID_RSA / RAC Oracle",
+            "impact": "GENERICO / ID_RSA / RAC Oracle",
+            "variable": [
+                "Cuenta para Oracle DBA"
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/cesnet/.ssh/id_rsa",
+            "owner": "cesnet",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/jenkins/.ssh/id_rsa",
+            "owner": "jenkins",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/des_int/.ssh/id_rsa",
+            "owner": "des_int",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/sched/.ssh/id_rsa",
+            "owner": "sched",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/schedksh/.ssh/id_rsa",
+            "owner": "schedksh",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/pro/apl/cft/.ssh/id_rsa",
+            "owner": "cft",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/pro/apl/edt/.ssh/id_rsa",
+            "owner": "edt",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/pro/apl/ef2/.ssh/id_rsa",
+            "owner": "pro_ef2",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/pro/apl/int/.ssh/id_rsa",
+            "owner": "pro_int",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/pro/apl/rai/.ssh/id_rsa",
+            "owner": "pro_rai",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                ""
+            ],
+            "SO": "LINUX"
+        }
+    ],
+    "FT": [
+        {
+            "object": "/home/esy9ar02/.ssh/id_rsa",
+            "owner": "esy9ar02",
+            "tipo": "/E/",
+            "ownerGroup": "INFORTEC",
+            "user": [
+                "ft-bbdd-raul_bolano_diaz"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "## Para implementar una FRASE DE PASO, se recomienda que lo haga el owner de la cuenta, se le puede indicar como hacer con el siguiente comando, donde \"$file_idrsa\", es el fichero id_rsa a corregir.",
+            "impact": "ssh-keygen -p -f $file_idrsa",
+            "variable": [
+                "file_idrsa=\"/home/esy9ar02/.ssh/id_rsa\""
+            ],
+            "SO": "Linux"
+        },
+        {
+            "object": "/home/spinol/.ssh/id_rsa",
+            "owner": "spinol",
+            "tipo": "/E/",
+            "ownerGroup": "Red de Datos",
+            "user": [
+                "Pinol Jane, Salvador"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "## Para implementar una FRASE DE PASO, se recomienda que lo haga el owner de la cuenta, se le puede indicar como hacer con el siguiente comando, donde \"$file_idrsa\", es el fichero id_rsa a corregir.",
+            "impact": "ssh-keygen -p -f $file_idrsa",
+            "variable": [
+                "file_idrsa=\"/home/spinol/.ssh/id_rsa\""
+            ],
+            "SO": "Linux"
+        }
+    ],
+    "INFRA": [
+        {
+            "object": "/home/dnsadmin/.ssh/id_rsa",
+            "owner": "dnsadmin",
+            "tipo": "/F/",
+            "ownerGroup": "Sistemas",
+            "user": [
+                "Grupo de sistemas"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ESMA2DN01SR15NM"
+            ],
+            "risk": "El owner de la cuenta debe configurar la PASSPHRASE, se puede hacer con el siguiente comando, donde \"$file_idrsa\", es el fichero id_rsa a corregir.",
+            "impact": "## COMANDO\n\nssh-keygen -p -f $file_idrsa",
+            "variable": [
+                "file_idrsa=\"/home/dnsadmin/.ssh/id_rsa\""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/etc/telegraf/.ssh/id_rsa",
+            "owner": "telegraf",
+            "tipo": "/S/",
+            "ownerGroup": "Comand Center N2P",
+            "user": [
+                "Alejandro Vicente Blázquez",
+                "Roberto Fuentes Moñita"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "El owner de la cuenta debe configurar la PASSPHRASE, se puede hacer con el siguiente comando, donde \"$file_idrsa\", es el fichero id_rsa a corregir.",
+            "impact": "## COMANDO\n\nssh-keygen -p -f $file_idrsa",
+            "variable": [
+                "file_idrsa=\"/etc/telegraf/.ssh/id_rsa\""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/smo/.ssh/id_rsa",
+            "owner": "smo",
+            "tipo": "/S/",
+            "ownerGroup": "Comand Center N2P",
+            "user": [
+                "Alejandro Vicente Blázquez",
+                "Roberto Fuentes Moñita"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Servers"
+            ],
+            "risk": "El owner de la cuenta debe configurar la PASSPHRASE, se puede hacer con el siguiente comando, donde \"$file_idrsa\", es el fichero id_rsa a corregir.",
+            "impact": "## COMANDO\n\nssh-keygen -p -f $file_idrsa",
+            "variable": [
+                "file_idrsa=\"/home/smo/.ssh/id_rsa\""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/tevjmp15/.ssh/id_rsa",
+            "owner": "tevjmp15",
+            "tipo": "/S/",
+            "ownerGroup": "TEVA",
+            "user": [
+                "Rafal.Miskiewicz@kyndryl.com",
+                "Grzegorz.Mateja@kyndryl.com"
+            ],
+            "code": "NULL",
+            "servers": [
+                ""
+            ],
+            "risk": "",
+            "impact": "",
+            "variable": [
+                "file_idrsa=\"/home/tevjmp15/.ssh/id_rsa\""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/ncosys/.ssh/id_rsa",
+            "owner": "ncosys",
+            "tipo": "/S/",
+            "ownerGroup": "Tivoli",
+            "user": [
+                "Mari Cruz Terciado"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "We don't run any risk with leaving it like this. It is impossible to copy the file id_rsa, take it to another machine and connect without password because on the target machine the authorized_keys is configured to only support connections without password from the source.",
+            "impact": "If you set up id_rsa with passphrase the script that controls the HA of the JDBC GW would stop working, you could not control which machine is running and you could not copy the cache files. This could lead to corruption failures of the BBDD in e",
+            "variable": [
+                "Ademas del RISK e IMPACT, hay que adjuntar un PDF: llamado 'GSMA_OMNibus_Failover_Cookbook_10.1.1.0', ubicado en `documentos/`"
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/root/.ssh/id_rsa",
+            "owner": "root",
+            "tipo": "/F/",
+            "ownerGroup": "Soporte Linux",
+            "user": [
+                "Fernando Roldan Garrote",
+                "Luis Isabel Saez", 
+                "RICARDO CIPRES BAGUESTE", 
+                "SILVIA PEREIRA LARA"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "Usuario root no debe tener una clave publica, ni privada.",
+            "impact": "",
+            "variable": [
+                "file_idrsa=\"/root/.ssh/id_rsa\""
+            ],
+            "SO": "LINUX"
+        },
+        {
+            "object": "/home/root/.ssh/id_rsa",
+            "owner": "root",
+            "tipo": "/F/",
+            "ownerGroup": "Soporte Linux",
+            "user": [
+                "@LORENZO FUERTES RAMON"
+            ],
+            "code": "1-OK",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "Usuario root no debe tener una clave publica, ni privada.",
+            "impact": "",
+            "variable": [
+                "file_idrsa=\"/home/root/.ssh/id_rsa\""
+            ],
+            "SO": "Aix"
+        }
+    ],
+    "LBK": [
+        {
+            "object": "/batchUCMD/batchUCMD.INTRANET/.ssh/id_rsa",
+            "owner": "ubroker",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Fichero pertenece a una cuenta de cliente"
+            ],
+            "SO": "Aix"
+        },
+        {
+            "object": "/home/bigsql/.ssh/id_rsa",
+            "owner": "bigsql",
+            "tipo": "/S/",
+            "ownerGroup": "*EPUXOS",
+            "user": [
+                "CARLOS PEREZ GARCIA", 
+                "DG-distDBA-pf2.Sq2@kyndryl.com",
+                "sppf2dbbdd@kyndryl.com"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "Protection against inadequate access is weaker",
+            "impact": "The pipeline between the bigsql nodes might be affected and stop working.",
+            "variable": [
+                ""
+            ],
+            "SO": "Aix"
+        },
+        {
+            "object": "/home/nodejs/.ssh/id_rsa",
+            "owner": "nodejs",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Fichero pertenece a una cuenta de cliente"
+            ],
+            "SO": "Aix"
+        },
+        {
+            "object": "/home/tibco/.ssh/id_rsa",
+            "owner": "tibco",
+            "tipo": "/C/",
+            "ownerGroup": "Customer",
+            "user": [
+                "Customer"
+            ],
+            "code": "2-DOC",
+            "servers": [
+                "ALL Server"
+            ],
+            "risk": "GENERICO / ID_RSA / CUSTOMER",
+            "impact": "GENERICO / ID_RSA / CUSTOMER",
+            "variable": [
+                "Clave privada pertenece a una cuenta de cliente"
+            ],
+            "SO": "Aix"
+        }
+    ]
+}
