@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post" id="formu" autocomplete="off">
+        <input type="text" name="nombre" id="nombre">
+        <br>
+        <textarea name="mensaje" id="mensaje" rows="6"></textarea>
+        <br>
+        <input type="color" name="color" id="color">
+        <br>
+        <input type="range" name="tiempo" id="tiempo">
+        <br>
+        <input type="file" name="archivo" id="archivo">
+        <br>
+        <input type="checkbox" name="muerto" id="muerto" value="1">
+        <br>
+        <button>Enviar</button>
+    </form>
+
+    <script>
+        // Necesito una ref al formulario...
+        const formu = document.querySelector("#formu");
+        // el evento onsubmit se produce cuando se va a enviar el formulario. Justo antes de hacer el salto de página
+        formu.onsubmit = async function(evento) {
+            // "evento" es un objeto que JS pasa a cualquier evento. Contiene información muy útil
+            // Para empezar, voy a CANCELAR el envío del formulario
+            evento.preventDefault();
+            //console.log(evento);
+
+            // Voy a recoger todos los campos de este formulario en un único objeto FormData:
+            let fd = new FormData(formu);
+            // Esto crea un objeto FormData relleno con los campos del formulario
+            //console.log(fd);
+            // Al FormData le puedo AÑADIR nuevos campos a lo bestia desde JS:
+            fd.append("comando", "formulario");
+
+            // Ahora voy a usar este FormData para enviar los datos a una api por ajax. Por el método POST
+            let url = "http://www.coavnss.org/api/api.php";
+            // Este objeto lo necesitamos para mandar los datos por Ajax con fetch
+            let opciones = {
+                method: "POST",
+                body: fd
+            }
+            // Y ahora sí:
+            let respuesta = await fetch(url, opciones);
+            let datos = await respuesta.json();
+            console.log(datos);
+
+
+
+
+        }
+    </script>
+</body>
+</html>

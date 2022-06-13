@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM FORMULARIOS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <form action="#" method="post" >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Guardar session</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    <script>
+    // Referencias a cosas de la página
+    const listado = document.querySelector("#listado");
+    const salida = document.querySelector("#salida");
+
+    // Esto lo voy a hacer con Ajax clásico primero, y con Ajax nuevo después
+    // La URL de la API para obtener la lista de provincias:
+    let url = "http://www.coavnss.org/api/api.php?comando=provincias";
+    let ajax = new XMLHttpRequest();
+    ajax.open("GET", url);
+    ajax.send(); 
+    // Evento load que se produce en el objeto del ajax cuando se han recibido los datos de la petición a la API
+    ajax.addEventListener("load", datosRecibidos);
+
+    function datosRecibidos() {
+        // En este contexto, "this" representa al objeto ajax
+        // Ese objeto ajax tiene una propiedad llamada responseText, que es una CADENA DE TEXTO PLANO que contiene la respuesta del servidor
+        // Como sé que está en idioma JSON, la convierto a datos nativos
+        var datos = JSON.parse(this.responseText);
+        console.log(datos);
+        // Y ahora puedo recorrer el objeto datos.data (ver en la consola) para ir generando los <option> del <select>
+        for(var item of datos.data) {
+            listado.innerHTML += `<option value="${item.id}">${item.provincia}</option>`;
+        }
+    }
+
+    // Ejercicio: crea código para que, cuando seleccionemos una provincia de ese <select>, se pida por Ajax la lista de municipios de esa provincia, y sácala por la consola.
+    // La url para pedir los municipios de Gipuzkoa sería esta:
+    //http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=20
+    // 20 = Gipuzkoa
+
+    listado.onchange = function() {
+        // Compongo la url de la api a partir del id de la provincia seleccionada
+        var url = "http://www.coavnss.org/api/api.php?comando=municipios&idProvincia=" + this.value;
+        console.log(url);
+        // Voy a crear otro objeto para el ajax
+        let ajax2 = new XMLHttpRequest();
+        ajax2.open("GET", url);
+        ajax2.send(); 
+        ajax2.addEventListener("load", municipiosCargados);
+    }
+
+    function municipiosCargados() {
+        // Del mismo modo que antes, he recibido una cadena en formato json. Debo convertirla a datos nativos
+        var datos = JSON.parse(this.responseText);
+        console.log(datos);
+        // Esta función es llamada cada vez que cambiamos de provincia. Por eso, cada vez tengo que VACIAR el <div> de la salida:
+        salida.innerHTML = "";
+        // Y ahora sí, voy recorriendo datos.data y añadiendo algo de html a ese <div>
+        for(var item of datos.data) {
+            salida.innerHTML += `<option value="${item.id}">${item.municipio}</option>`;
+        }
+    }
+
+    enviar.onclick = function() {
+        //http://www.coavnss.org/api/api.php?comando=email&a=lopumacp@hotmail.com&asunto=prueba&mensaje=hola lopuma
+        //var url = "http://www.coavnss.org/api/api.php?comando=email&a=lopumacp@hotmail.com&asunto=prueba&mensaje=hola lopuma";
+        var email = document.querySelector("#email").value
+        var asunto = document.querySelector("#asunto").value
+        var mensaje = document.querySelector("#mensaje").value
+        console.log(url)
+        console.log(email)
+        console.log(asunto)
+        console.log(mensaje)
+        var url = "http://www.coavnss.org/api/api.php?comando=email&a="+email+"&asunto="+asunto+"&mensaje="+mensaje;
+        console.log(url)
+        let ajax3 = new XMLHttpRequest();
+        ajax3.open("GET", url);
+        ajax3.send(); 
+        ajax3.addEventListener("load", enviado);
+        message = "Mensaje enviado a : " + email;
+        alert(message, 'success');
+    }
+
+    function enviado() {
+        console.log(this.responseText)
+    }
+</script>    
+</body>
+</html>

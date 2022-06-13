@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMULARIOS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+        .caja {
+            border: 1px solid #CCC;
+            padding: 15px;;
+        }
+    </style>
+</head>
+<body>
+    <di class="container">
+        <h1>
+            FORMULARIO PARA ENVIAR 
+            <small class="text-muted">MENSAJE</small>
+        </h1>
+    </di>
+    <!-- <select id="listado"  class="form-select" aria-label="Default select example"></select>-->
+    <!-- <div id="salida" class="d-flex flex-wrap"></div> -->
+    <!-- <select id ="salida" class="form-select" multiple aria-label="multiple select example"></select> --> 
+    <form action="#" method="post" id="formu">
+        <div class="mensaje container-fluid mb-3">  
+            <br>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email : </label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" id="email">
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="exampleInputAsunto1" class="form-label">Asunto :</label>
+                <input class="form-control" type="text" id="asunto">
+            </div>
+            <br>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Escribe aqui tu mensaje" id="mensaje"></textarea>
+                <label for="floatingTextarea">Mensaje</label>
+            </div>
+            <br>
+            <button id="enviar" type="button" class="btn btn-success">Enviar</button>
+        </div>
+    </form>    
+    <br>
+    
+    <script>
+        const formulario = document.querySelector("#formu");
+        const enviar =  document.querySelector("#enviar")
+        // formu.onsubmit = async function(evento) {
+        //     evento.preventDefault();
+        //     let fd = new FormData(formu);
+        //     fd.append("comando", "formulario");
+        //     let url = "http://www.coavnss.org/api/api.php";
+        //     let opciones = {
+        //         method: "POST",
+        //         body: fd
+        //     }
+        //     let respuesta = await fetch(url, opciones);
+        //     let datos = await respuesta.json();
+        //     console.log(datos);
+        
+        enviar.onclick = () => {
+            const datosForm = new FormData(formulario);
+            console.log(datosForm);
+        }
+    </script>
+
+</body>
+</html>

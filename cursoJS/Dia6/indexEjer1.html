@@ -47,11 +47,11 @@
                         <tfoot><h2 id="foot">Lista de modulos</h2></tfoot>
                     <br>
                     </table>
+                    <!-- <select id="owner" size="12"></select> -->
                 </div>
             </div>
         </div>
     </div>
-    <script charset="UTF-8" src="modulos.json"></script>
     <script charset="UTF-8">
         const pathFile = document.querySelector("#formFile");
         const tabla = document.querySelector("#lista-usuario tbody");
@@ -66,49 +66,43 @@
             leerDatos(path, client);
         }
 
-        function leerDatos(path, client) {
-            const url = "/cursoJS/deviations/dataIssues/"+path;
-            foot.innerHTML = "Lista de modulos del cliente : "+client
-            fetch(url)
-                .then(respuesta => respuesta.json())
-                .then(usuarios => {
-                    for (elemento of usuarios[client]) {
-                        const row = document.createElement('tr');
-                        row.innerHTML += `
-                            <th>${elemento.modulo}</th>
-                            <td>${elemento.clave}</td>
-                            <td>${elemento.SO}</td>
-                        `;
-                        tabla.appendChild(row);
-                    }
-                })
-        }
-        // async function leerDatos(path) {
+        // function leerDatos(path, client) {
         //     const url = "/cursoJS/deviations/dataIssues/"+path;
-        //     //const url = "modulos.json";
-        //     console.log("URL : ", url)
-        //     let respuesta = await fetch(url);
-        //     let datos = await respuesta.json();
-        //     console.log(datos['INFRA'])
-        //     //recorrerDatos(datos);
+        //     foot.innerHTML = "Lista de modulos del cliente : "+client
+        //     fetch(url)
+        //         .then(respuesta => respuesta.json())
+        //         .then(usuarios => {
+        //             for (elemento of usuarios[client]) {
+        //                 const row = document.createElement('tr');
+        //                 row.innerHTML += `
+        //                     <th>${elemento.modulo}</th>
+        //                     <td>${elemento.clave}</td>
+        //                     <td>${elemento.SO}</td>
+        //                 `;
+        //                 tabla.appendChild(row);
+        //             }
+        //         })
         // }
-        // function recorrerDatos(datos) {
-        //     console.log(typeof(datos))
-        //     const row = document.createElement('tr');
-        //     for (let i in datos) {
-        //         for (let j in datos[i]) {
-        //             console.log(datos[i][j].modulo)
-        //             row.innerHTML += `
-        //                 <th scope="row">${datos[i][j].modulo}</th>
-        //                 <td>${datos[i][j].clave}</td>
-        //                 <td>${datos[i][j].SO}</td>
-        //             `;
-        //         }
-        //     }
-        //     tabla.appendChild(row);
-        //     console.log("Mostrando resultado final:");
-        //     console.log(datos);
-        // };
+
+        async function leerDatos(path, client) {
+            let url = "/cursoJS/deviations/dataIssues/"+path;
+            foot.innerHTML = "Lista de modulos del cliente : "+client
+            // const owner = document.querySelector("#owner");
+            let respuesta = await fetch(url);
+            let datos = await respuesta.json();
+            for (let elemento of datos[client]) {
+                const row = document.createElement('tr');
+                row.innerHTML += `
+                    <th>${elemento.modulo}</th>
+                    <td>${elemento.clave}</td>
+                    <td>${elemento.SO}</td>
+                `;
+                // owner.innerHTML += `
+                //     <option value="${elemento.refrescar}">${elemento.refrescar}</option>
+                // `;
+                tabla.appendChild(row);
+            }
+        }
     </script>
 </body>
 </html>
