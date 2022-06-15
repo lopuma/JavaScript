@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		let gato = {
+			nombre: "Aidulfo",
+			edad: 12,
+			pedir: function() {console.log("Miaaaao")}
+		};
+		gato.pedir();
+		let gata = {... gato}; // un tanto cutre, pero eficaz
+		gata.nombre = "Abelina";
+		// Esta forma de crear gatos es una ñapa <ñapacode>
+
+		// Vamos a hacerlo de otra forma
+		// Ten en cuenta que en el fondo, JS no "piensa" en clases, sino en objetos. Así que esto es morralla sintácitca para que te resulte más claro escribir JS, pero no estamos haciendo nada que no se pudiera hacer antes
+
+		// Una clase es una "plantilla" para crear objetos. Los objetos de esta clase tendrán todas las cosas de esta clase
+		class Gato {
+			// Esto son propiedades de la clase Gato. Son compartidas por todas las instancias. NO llevan var ni let
+			raza = "siamés";
+
+			// En las clases de JS hay una función especial (no obligatoria) llamada constructor(). Esta función se ejecuta automáticamente cada vez que se crea una instancia de esta clase
+			constructor(colorPelo = "naranja") {
+				this.hermanos = [];
+				this.color = colorPelo;
+				console.log("Un nuevo gato ha aparecido en el mundo");
+				// Aquí aprovecho para inicializar algunas propiedades de cada instancia
+				this.edad = parseInt(Math.random() * 17);
+				// Cuando quiero trabajar con propiedades de la clase, tengo que usar "this"
+			}
+
+			// Esto son MÉTODOS. NO llevan la palabra function
+			maullar() {
+				console.log("meaaaow");
+			}
+			cagar() {
+				console.log("plop!");
+			}
+		}
+		class GatoCallejero extends Gato {
+			raza = "callejero";
+		}
+
+		// Para crear un nuevo objeto Gato, lo hacemos así.
+		// Esto se conoce como "crear una instancia de la clase Gato"
+		let aidulfo = new Gato();
+		let abelina = new Gato("gris");
+		let madaleno = new Gato();
+		let satanasa = new GatoCallejero();
+		
+		aidulfo.hermanos = [abelina, satanasa];
+		madaleno.raza = "cualquiera";
+
+
+	</script>
+</body>
+</html>

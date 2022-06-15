@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		let colores = ["gris", "rojo", "blanco", "lavanda", "naranja", "negro", "azul", "verde", "rosa", "2amarillo", "marrón", "verde cinabrio", "ocre" ];
+		console.log("COLORES 1:", colores);
+		let ultimo = colores.pop();	// Elimina el último
+		console.log("COLORES 2:", colores);
+		let primero = colores.shift();	// Elimina el primero
+		console.log("COLORES 3:", colores);
+		colores.push("gris Payne"); // Añade al final
+		console.log("COLORES 4:", colores);
+		colores.unshift("Amarillo Nápoles"); // Añade al comienso
+		console.log("COLORES 5:", colores);
+		
+		//colores.splice(2);// Elimina todo desde el item 2 (blanco), incluido
+		//colores.splice(2, 3);// Elimina 3 items desde el item 2
+		colores.splice(2,0,"kaki", "beige"); // en el item 2, no borra ninguno, e inserta kaki y beige
+		console.log("COLORES 6:", colores);
+		colores.reverse();
+		console.log("COLORES 7:", colores);
+		
+		
+		let cadena = colores.join("-"); // Junta los items de un array en una cadena, uniéndolos por el parámetro que le pasamos
+		console.log(cadena);
+		
+		
+		colores = colores.sort();
+		console.log("COLORES 8:", colores);
+		
+		
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post" id="formu" autocomplete="off">
+        <input type="text" name="nombre" id="nombre">
+        <br>
+        <textarea name="mensaje" id="mensaje" rows="6"></textarea>
+        <br>
+        <input type="color" name="color" id="color">
+        <br>
+        <input type="range" name="tiempo" id="tiempo">
+        <br>
+        <input type="file" name="archivo" id="archivo" accept=".jpg,.png" multiple>
+        <br>
+        <input type="checkbox" name="muerto" id="muerto" value="1">
+        <br>
+        <button>Enviar</button>
+    </form>
+
+    <script>
+        const formu = document.querySelector("#formu");
+        formu.onsubmit = async function(evento) {
+            evento.preventDefault();
+
+            /////////////////////////////////////////////////////
+            // VALIDACIONES
+            let errores = "";
+            if(document.querySelector("#nombre").value == "") errores += "El nombre es obligaotrio\n";
+            if(document.querySelector("#mensaje").value == "") errores += "El mensaje es obligaotrio\n";
+            let archivo = document.querySelector("#archivo");
+			if(archivo.files.length > 0) {
+				if(archivo.files[0].size > 10000) errores += "El archivo es demasiado grande\n";
+				// Sacamos el nombre del primer archivo
+				let nombre = archivo.files[0].name;
+				// Lo separo por el punto, (split)
+				// y me quedo con el último elemento (pop)
+				let extension = nombre.split(".").pop();
+				// includes() es un método de los arrays que nos devuelve true o false dependiendo de si el parámetro está o no incluido en ese array
+				let permitida = ["jpg", "png"].includes(extension);
+				if(! permitida) errores += "Extensión de archivo no permitida";
+				//return;
+			}
+            
+
+
+            if(errores != "") {
+                alert(errores);
+				return;
+            }
+            /////////////////////////////////////////////////////
+
+
+            let fd = new FormData(formu);
+            fd.append("comando", "formulario");
+
+            let url = "http://www.coavnss.org/api/api.php";
+            let opciones = {
+                method: "POST",
+                body: fd
+            }
+            let respuesta = await fetch(url, opciones);
+            let datos = await respuesta.json();
+            console.log(datos);
+
+
+
+
+        }
+    </script>
+</body>
+</html>

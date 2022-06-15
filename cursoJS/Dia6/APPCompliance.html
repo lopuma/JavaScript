@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>APP Compliance</title>
+    <style>
+        .container {
+            border: 1px solid #CCC;
+            padding: 8px;;
+        }
+        .container-        .container {
+            border: 1px solid #CCC;
+            padding: 8px;;
+        }
+        .container-fluid {
+            padding: 18px;;
+        }fluid {
+            padding: 18px;;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid mb-3">
+        <input class="form-control" type="file" id="formFile">
+        <br>
+        <label>Buscar : </label>
+        <br>
+        <div class="input-group mb-3">
+            <input type="text"  id="findCustomer" class="form-control" placeholder="Customer" aria-label="Customer" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="buscar">Buscar</button>
+          </div>
+        <br>
+        <button type="button" class="btn btn-primary" id="añadir">Añadir</button>
+    </div>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <div class="my-3">
+                    <table class="table table-bordered" id="lista-usuario">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">MODULO</th>
+                                <th scope="col">CLAVE</th>
+                                <th scope="col">SO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot><h2 id="foot">Lista de modulos</h2></tfoot>
+                    <br>
+                    </table>
+                    <!-- <select id="owner" size="12"></select> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script charset="UTF-8">
+        const pathFile = document.querySelector("#formFile");
+        const tabla = document.querySelector("#lista-usuario tbody");
+        const add = document.querySelector('#añadir');
+        const find = document.querySelector('#buscar');
+        const foot = document.querySelector('#foot');
+        const findCustomer = document.querySelector('#findCustomer');
+        
+        add.onclick = function(){
+            path = pathFile.files[0].name;
+            client = obtenerCustomer(path)
+            console.log("CLIENTE DEVUELTO ", client)
+            tabla.innerHTML = "";
+            leerDatos(path, client);
+        }
+
+        find.onclick = function(){
+            if (findCustomer.value != "") {
+                client = findCustomer.value;
+                path = buscarCustomer(client);
+                console.log("PATH DEVUELTO ", path);
+                tabla.innerHTML = "";
+                leerDatos(path, client);
+                return
+            }
+            alert("Debes añadir un cliente")
+        }
+
+        function obtenerCustomer (path) {
+            let cls =  path.split("_").pop();
+            let client =  cls.split(".").shift();
+            return client
+        }
+
+        function buscarCustomer (client){
+            let extFile = ["deviations_",".json"]
+            extFile.splice(1,0,client)
+            path = extFile.join("")
+            return path
+        }
+
+        // function leerDatos(path, client) {
+        //     const url = "/cursoJS/deviations/dataIssues/"+path;
+        //     foot.innerHTML = "Lista de modulos del cliente : "+client
+        //     fetch(url)
+        //         .then(respuesta => respuesta.json())
+        //         .then(usuarios => {
+        //             for (elemento of usuarios[client]) {
+        //                 const row = document.createElement('tr');
+        //                 row.innerHTML += `
+        //                     <th>${elemento.modulo}</th>
+        //                     <td>${elemento.clave}</td>
+        //                     <td>${elemento.SO}</td>
+        //                 `;
+        //                 tabla.appendChild(row);
+        //             }
+        //         })
+        // }
+
+        async function leerDatos(path, client) {
+            let url = "/cursoJS/deviations/dataIssues/"+path;
+            foot.innerHTML = "Lista de modulos del cliente : "+client
+            // const owner = document.querySelector("#owner");
+            try{
+                let respuesta = await fetch(url);
+                let datos = await respuesta.json();
+                for (let elemento of datos[client]) {
+                const row = document.createElement('tr');
+                row.innerHTML += `
+                    <th>${elemento.modulo}</th>
+                    <td>${elemento.clave}</td>
+                    <td>${elemento.SO}</td>
+                `;
+                // owner.innerHTML += `
+                //     <option value="${elemento.refrescar}">${elemento.refrescar}</option>
+                // `;
+                tabla.appendChild(row);
+            }
+            }catch (error){
+                console.error("No existe ese cliente");
+                alert("No existe ese cliente")
+                tabla.innerHTML = "";
+                return
+            }
+        }
+    </script>
+</body>
+</html>

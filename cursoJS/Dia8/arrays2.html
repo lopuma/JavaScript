@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		let ranking = [100, 200, 50, 800, 75, 1000, 2, 400000];
+		console.log("RANKING 1:", ranking);
+		ranking = ranking.sort();
+		console.log("RANKING 2:", ranking);
+		ranking = ranking.sort(function(a,b) {
+			// Ordenación numérica
+			console.log(a,b);
+			return b > a;
+		});
+		console.log("RANKING 3:", ranking);
+		ranking = ranking.sort(function(a,b) {
+			// Ordenación aleatoria. Porque este código devuelve 0 o 1 al azar
+			return parseInt(Math.random() * 2);
+		});
+		console.log("RANKING 4:", ranking);
+		
+
+	</script>
+</body>
+</html>

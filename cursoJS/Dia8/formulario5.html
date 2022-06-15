@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+		let persona = {
+			edad: 59,
+			nombre: "Braulio",
+			viudo: false,
+			dientes: [0,1,1,1,0,0,0,1,1,0],
+			cabello: "negro"
+		}
+
+		// Podemos mandar objetos a una api, que no han sido generados desde ningún formulario
+
+		enviarDatos();
+        async function enviarDatos() {
+            let fd = new FormData();
+			// Puedo extraer los nombres y valores de las propiedades de un objeto mediante Object.entries
+			// Y los puedo recorrer con un array para añadirlos al formulario virtual ese:
+			for(let [clave, valor] of Object.entries(persona)) {
+				fd.append(clave, valor);
+			}
+			// También puedo añadirle campos a posteriori, de modo independiente
+			fd.append("comando", "formulario");
+
+			// Ahora envío ese formulario virtual a la API
+            let url = "http://www.coavnss.org/api/api.php";
+            let opciones = {
+                method: "POST",
+                body: fd
+            }
+            let respuesta = await fetch(url, opciones);
+            let datos = await respuesta.json();
+            console.log(datos);
+        }
+    </script>
+</body>
+</html>
