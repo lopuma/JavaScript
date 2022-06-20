@@ -20,6 +20,15 @@
         }fluid {
             padding: 18px;;
         }
+        textarea {
+            column-gap: 50;
+        }
+        .notecard {
+            background-color:aqua;
+             margin: 1rem 0;
+            padding: 1rem 1rem 1rem 3rem;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -42,9 +51,9 @@
                     <table class="table table-bordered" id="lista-usuario">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">MODULO</th>
-                                <th scope="col">CLAVE</th>
-                                <th scope="col">SO</th>
+                                <th scope="col">MODULE</th>
+                                <th scope="col">KEY</th>
+                                <th scope="col">CHECK</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,28 +128,70 @@
         async function leerDatos(path, client) {
             let url = "/cursoJS/deviations/dataIssues/"+path;
             foot.innerHTML = "Lista de modulos del cliente : "+client
+            
+            //document.getElementById("divInsteadOfDocument.Write").appendChild(obj);
             // const owner = document.querySelector("#owner");
+
             try{
                 let respuesta = await fetch(url);
                 let datos = await respuesta.json();
                 for (let elemento of datos[client]) {
-                const row = document.createElement('tr');
-                row.innerHTML += `
-                    <th>${elemento.modulo}</th>
-                    <td>${elemento.clave}</td>
-                    <td>${elemento.SO}</td>
-                `;
-                // owner.innerHTML += `
-                //     <option value="${elemento.refrescar}">${elemento.refrescar}</option>
-                // `;
-                tabla.appendChild(row);
-            }
+                    const row = document.createElement('tr');
+                    row.innerHTML += `
+                        <th>${elemento.modulo}</th>
+                        <td>${elemento.clave}</td>
+                    `;
+                    // owner.innerHTML += `
+                    //     <option value="${elemento.refrescar}">${elemento.refrescar}</option>
+                    // `;
+                    var comprobacion = elemento.comprobacion
+                    var comp = comprobacion.split('\n')
+                    for (var i = 0; i < comp.length; i++){
+                        console.log(comp[i].startsWith('##'));
+                        if (comp[i].startsWith('+')){
+                            row.innerHTML += `
+                                <div style='text-decoration:none; color:blue; display:block; padding=0'>${comp[i]}</div>
+                            `;
+                        }else if (comp[i].startsWith('##')){
+                            row.innerHTML += `
+                                <div style='text-decoration:none; color:black; font-weight: bold; display:block'>${comp[i]}</div>
+                            `;
+                        }else{
+                            row.innerHTML += `
+                                <div  style='
+  --note-background: var(--background-information);
+  --note-theme: var(--icon-information);
+  background-color: aqua;
+  border: 1px solid var(--border-secondary);
+  border-left: 4px solid var(--note-theme);
+  border-radius: .25rem;
+  border-radius: var(--elem-radius);
+  box-shadow: var(--shadow-01);
+  margin: 1rem 0;
+    margin-bottom: 1rem;
+  padding: 1rem 1rem 1rem 3rem;
+  position: relative;'>${comp[i]}</div>
+                            `;
+                        }
+                    }
+                    tabla.appendChild(row);
+                }
             }catch (error){
                 console.error("No existe ese cliente");
                 alert("No existe ese cliente")
                 tabla.innerHTML = "";
                 return
             }
+            // var txt = document.querySelector("#floatingTextarea")
+
+            // console.log(txt.value)
+            // var lines = txt.value.split('\n');
+
+            // for(var i = 0;i < lines.length;i++){
+
+            //     console.log(lines)
+
+            // }
         }
     </script>
 </body>
