@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		class CuerpoCeleste {
+			// Estas propiedades de clase son relativamente recientes
+			masa = 123213;
+			// Tradicionalmente, las variables privadas se escriben con un "_" delante. Pero en JS, de momento, eso no vale para nada. Todo es PÚBLICO
+			_lunas = 28;
+			// Cuando pones un # en el nombre de una variable de clase, se convierte en PRIVADA, y no puede ser accedida desde fuera de la clase.
+			// OJO: esto es MUY RECIENTE, y no se garantiza que funcione en todos los navegadores
+			#rotacion = 15;
+
+			constructor(nombre = "", padre = null) {
+				// Vamos a hacer que el nombre del cuerpo celeste sea obligatorio
+				if(nombre == "") throw new Error("El nombre de esta cosa es obligatorio!!!");
+				this._nombre = nombre;
+			}
+
+			// Hay veces en que no queremos acceder a una variable de forma directa, porque hay que validarla, o aplicarle una transformación. Entonces podemos usar unas funciones especiales llamadas GETTERS/SETTERS
+			get nombre() {
+				// La función get es para OBTENER el valor de una propiedad interna
+				return this._nombre.toUpperCase();
+			}
+
+			set nombre(parametro) {
+				// La función set es para CAMBIAR el valor de una propiedad interna
+				if(parametro.length < 3) throw new Error("El nombre del cuerpo es demasiado corto");
+				this._nombre = parametro;
+			}
+
+
+			describe() {
+				console.log("Descripción de la clase:");
+				console.log(this);
+			}
+		}
+
+		let p1 = new CuerpoCeleste("Saturno");
+		console.log(p1.masa);
+	</script>
+</body>
+</html>

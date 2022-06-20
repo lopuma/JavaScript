@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+		}
+		.pelota {
+			width: 150px;
+			height: 150px;
+			border-radius: 10000px;
+			background-color: beige;
+			transform: translate(-50%, -50%);
+			position: fixed;
+			transition: all 1s;
+		}
+	</style>
+</head>
+<body>
+	
+	<script>
+		class Pelota {
+
+			constructor() {
+				this.elemento = document.createElement("div");
+				this.elemento.className = "pelota";
+				document.body.appendChild(this.elemento);
+				this.reposiciona();
+				this.colorea();
+
+				var yuyu = this; // Referencia de reserva
+				var tiempo = parseInt(Math.random() * 4000) + 1000 ;
+				this.crono = setInterval(function(){
+					yuyu.reposiciona();
+					yuyu.colorea();
+				}, tiempo);
+			}
+
+			reposiciona() {
+				var x = Math.random() * window.innerWidth;
+				var y = Math.random() * window.innerHeight;
+				this.elemento.style.left = x + "px";
+				this.elemento.style.top = y + "px";
+			}
+			colorea() {
+				var numero = parseInt(Math.random() * 16777216);
+				this.color = "#" + numero.toString(16);
+				this.elemento.style.backgroundColor = this.color;
+			}
+		}
+
+		for(var i=0; i<50; i++) {
+			var pipo = new Pelota();
+		}
+
+	</script>
+</body>
+</html>

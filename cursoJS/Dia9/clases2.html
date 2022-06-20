@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+		}
+		.pelota {
+			width: 150px;
+			height: 150px;
+			border-radius: 10000px;
+			background-color: beige;
+			transform: translate(-50%, -50%);
+			position: fixed;
+			transition: all 1s;
+		}
+	</style>
+</head>
+<body>
+	
+	<script>
+		var libro = {
+			titulo: "njsdabvfasdf",
+			paginas: 234
+		}
+
+
+		class Pelota {
+			// Podemos crear algunas variables aquí mismo:
+			texto = "prueba";
+			// OJO: sin var ni let
+
+			constructor() {
+				// En el constructor aprovechamos para inicializar propiedades de la instancia de esta clase
+				// Por ejemplo: creamos un elemento html virtual:
+				this.elemento = document.createElement("div");
+				// Este elemento, al ser virtual, no aparece en la página hasta que no lo añadamos al body. 
+				// Pero antes de eso, vamos a darle la clase css ".pelota"
+				this.elemento.className = "pelota";
+				// Lo añadimos al <body>:
+				document.body.appendChild(this.elemento);
+				// Ahora podría darle propiedades para colocarla en un lugar de la página al azar. O cambiarle el color
+				// Pero si lo meto todo dentro del constructor, se va a hacer demasiado grande para andar cómodo. Mejor hacer eso en otras funciones. Por ejemplo:
+				this.reposiciona();
+				this.colorea();
+				// Ya en plan master total del universo...
+
+				var yuyu = this; // Referencia de reserva
+				this.elemento.onclick = function() {
+					yuyu.reposiciona();
+					yuyu.colorea();
+					// Dentro de esta función, "this" representa al objeto que ha llamado a la función. O sea, a elemento (que es un elemento HTML y no tiene resposiciona() ni colorea() ). Y eso me daría error
+					// Así que utilizo la variable de reserva yuyu, que he creado antes y que sí representa a la clase Pelota
+				}
+			}
+
+			reposiciona() {
+				// calcula nuevas coordenadas X e Y al azar dentro de la ventana del navegador, y pone la pelota en ellas
+				var x = Math.random() * window.innerWidth;
+				var y = Math.random() * window.innerHeight;
+				this.elemento.style.left = x + "px";
+				this.elemento.style.top = y + "px";
+			}
+			colorea() {
+				// Tenemos que obtener un código de color hezadecimal (#F4DB9A) al azar.
+				var numero = parseInt(Math.random() * 16777216);
+				this.color = "#" + numero.toString(16);
+				this.elemento.style.backgroundColor = this.color;
+			}
+		}
+
+		let p1 = new Pelota();
+		let p2 = new Pelota();
+		let p3 = new Pelota();
+	</script>
+</body>
+</html>

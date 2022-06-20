@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		#muestra {
+			border: 1px solid black;
+			width: 200px; height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="muestra"></div>
+
+	<script>
+		let muestra = document.querySelector("#muestra");
+		let colores = ["red", "orange", "yellow", "lime", "green", "cyan", "blue", "purple"];
+
+		// Un GENERADOR es una función especial en JS:
+		function* cicla(datos) {
+			// Esta función crea un almacén de datos en la memoria del navegador, del que se pueden ir extrayendo desde el bojeto generador asociado a esta función
+			for(let i=0; i<datos.length; i++) {
+				yield colores[i];
+				// yield es lo que almacena el dato en la memoria temporal del navegador
+			}
+		}
+
+		// Esta variable es una referencia a la función generadora. 
+		// Esa función crea un almacén de datos del que los sacaremos 
+		// uno a uno cada vez que hagamos serie.next();
+		let serie = cicla(colores);
+
+		muestra.onclick = function() {
+			let color = serie.next();
+			console.log(color);
+			muestra.style.backgroundColor = color.value;
+		}
+	</script>
+</body>
+</html>
