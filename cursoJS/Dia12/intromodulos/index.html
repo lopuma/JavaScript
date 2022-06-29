@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Importar módulos</h1>
+	<p>Desde dentro de un script podemos importar otros archivos de JS para cargar y usar sus datos y código.</p>
+	<p><strong>REQUISITOS: </strong><br>
+		- En el archivo que vamos a cargar, debemos poner "export" delante de cualquier variable, constante, función o clase que queramos exportar. Los que no tengan un "export" delante no serán accesibles desde fuera, de modo que se comportarán como variables "privadas".
+		- El script donde vamos a importar las cosas debe tener el atributo type="module".
+		- La ruta del script que vamos a importar debe empezar por "./", y luego el resto de la ruta.
+	</p>
+
+    <script type="module">
+		
+        // Podemos importarlo TODO de un módulo, a condición de darle un espacio de nombres, en este caso por ejemplo, "yuyu"
+		//import * as yuyu from "./modelos/datosPrueba.js";
+		//console.log(yuyu.colores);
+		// No se recomienda esto porque si más adelante usamos herramientas de gestión de código (Gulp, Webpack, etc), esto baja mucho el rendimiento
+
+		// En vez de ello podemos importar solo las cosas que vayamos a usar, poniéndolas entre {}. En este caso podemos omitir ponerlas bajo un espacio de nombres,
+		// pero OJO: solo si no tenemos algo aquí que se llame igual. Es decir, que si aquí tuviera un let nombres = "", daría error de JS
+		let nombres = "lalalalala";
+		import {colores, nombres as nom} from "./modelos/datosPrueba.js";
+		console.log(colores);
+
+		// Si lo que vamos a importar es un export default, no hace falta ponerlo entre {} ni ponerlo en un espacio de nombres:
+		import Test from "./controladores/Test.js"
+		var yuyu = new Test()
+		// Este enfoque suele ser preferible, porque nos obliga a poner cada cosa exportable en su propio archivo. Lo cual hace que se creen muchos archivos, pero si los organizamos bien en carpetas, será fácil encontrar el código que queramos.
+    </script>
+</body>
+</html>

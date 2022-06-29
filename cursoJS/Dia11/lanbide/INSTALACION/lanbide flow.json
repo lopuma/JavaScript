@@ -1,0 +1,367 @@
+[
+    {
+        "id": "679f2057319927dc",
+        "type": "tab",
+        "label": "Experimentos",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eb417f0e6283df81",
+        "type": "inject",
+        "z": "679f2057319927dc",
+        "name": "Inicio",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "266c214064061217"
+            ]
+        ]
+    },
+    {
+        "id": "266c214064061217",
+        "type": "http request",
+        "z": "679f2057319927dc",
+        "name": "Petición HTTP",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "https://apps.lanbide.euskadi.net/apps/OF_OFERTAS_ODE_JSON",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 300,
+        "y": 120,
+        "wires": [
+            [
+                "d4e41d8883fc3a85"
+            ]
+        ]
+    },
+    {
+        "id": "c897135a256333ea",
+        "type": "debug",
+        "z": "679f2057319927dc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "texto",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "05af17bbc3190a88",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Iterar array",
+        "func": "for (var i = 0; i < msg.payload.length; i++) {\n    var newMsg = {};\n    msg.payload[i].modif = msg.payload[i].mod;\n    if(msg.payload[i].fecMod != \"\") {\n        var temp = msg.payload[i].fecMod.split(\"/\");\n        msg.payload[i].fecMod = \"'\" + temp.reverse().join(\"-\") + \"'\";\n    } else {\n         msg.payload[i].fecMod = \"NULL\";\n    }\n    if(msg.payload[i].fecPub != \"\") {\n        var timp = msg.payload[i].fecPub.split(\"/\");\n        msg.payload[i].fecPub = \"'\" + timp.reverse().join(\"-\") + \"'\";\n    } else {\n         msg.payload[i].fecPub = \"NULL\";\n    }\n    newMsg.payload = msg.payload[i];\n    node.send(newMsg);\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "663965bb6bbe2ef0"
+            ]
+        ]
+    },
+    {
+        "id": "f2777db1fb0d6a7b",
+        "type": "mysql",
+        "z": "679f2057319927dc",
+        "mydb": "01a21d982285e365",
+        "name": "",
+        "x": 1100,
+        "y": 240,
+        "wires": [
+            [
+                "c897135a256333ea"
+            ]
+        ]
+    },
+    {
+        "id": "663965bb6bbe2ef0",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Generar queries",
+        "func": "var item = msg.payload;\nmsg.topic = `\n    REPLACE INTO lan_empleo(codigo, desEmpleo, desPuesto, \n    tipo, pais, provincia, municipio, modif, fecMod, \n    fecPub, disc, url) \n    VALUES (\n        '${item.codigo}', \n        '${item.desEmpleo}', \n        '${item.desPuesto}', \n        '${item.tipo}', \n        '${item.pais}', \n        '${item.provincia}', \n        '${item.municipio}', \n        '${item.modif}', \n        ${item.fecMod}, \n        ${item.fecPub}, \n        '${item.disc}', \n        '${item.url}'\n    )\n`;\nmsg.texto = \"Consulta OK\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [
+                "f2777db1fb0d6a7b"
+            ]
+        ]
+    },
+    {
+        "id": "b83946643179310b",
+        "type": "comment",
+        "z": "679f2057319927dc",
+        "name": "FETCH Lanbide empleo",
+        "info": "",
+        "x": 150,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2838526a25f095b4",
+        "type": "comment",
+        "z": "679f2057319927dc",
+        "name": "FETCH Lanbide formación",
+        "info": "",
+        "x": 150,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "389338b446ecb2cb",
+        "type": "inject",
+        "z": "679f2057319927dc",
+        "name": "Inicio",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 400,
+        "wires": [
+            [
+                "314349e440d5bc63"
+            ]
+        ]
+    },
+    {
+        "id": "314349e440d5bc63",
+        "type": "http request",
+        "z": "679f2057319927dc",
+        "name": "Petición HTTP",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://apps.lanbide.euskadi.net/apps/FR_CURSOS_ODE_JSON?jsonCallBack=nombre",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 300,
+        "y": 400,
+        "wires": [
+            [
+                "50f2b1a859470061"
+            ]
+        ]
+    },
+    {
+        "id": "07cf8c2f9b94bbdf",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Parsear JSONP",
+        "func": "msg.payload = msg.payload.replace(\"nombre(\", \"\");\nmsg.payload = msg.payload.replace(\");\", \"\");\nmsg.payload = JSON.parse(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "229432b1805d5682"
+            ]
+        ]
+    },
+    {
+        "id": "229432b1805d5682",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Iterar array",
+        "func": "for (var i = 0; i < msg.payload.length; i++) {\n    var newMsg = {};\n    if(msg.payload[i].f_inicio != \"\") {\n        var temp = msg.payload[i].f_inicio.split(\"/\");\n        msg.payload[i].f_inicio = \"'\" + temp.reverse().join(\"-\") + \"'\";\n    } else {\n         msg.payload[i].f_inicio = \"NULL\";\n    }\n    if(msg.payload[i].f_fin != \"\") {\n        var timp = msg.payload[i].f_fin.split(\"/\");\n        msg.payload[i].f_fin = \"'\" + timp.reverse().join(\"-\") + \"'\";\n    } else {\n         msg.payload[i].f_fin = \"NULL\";\n    }\n    if(msg.payload[i].f_alta != \"\") {\n        var tomp = msg.payload[i].f_alta.split(\"/\");\n        msg.payload[i].f_alta = \"'\" + tomp.reverse().join(\"-\") + \"'\";\n    } else {\n         msg.payload[i].f_alta = \"NULL\";\n    }\n    newMsg.payload = msg.payload[i];\n    node.send(newMsg);\n}\nreturn null;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 520,
+        "wires": [
+            [
+                "8dc743a71099b3b1"
+            ]
+        ]
+    },
+    {
+        "id": "8dc743a71099b3b1",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Generar queries",
+        "func": "var item = msg.payload;\nmsg.topic = `\n    REPLACE INTO lan_formacion(codigo, titulo, municipio, \n    centro, f_inicio, f_fin, horas, colectivo, codprov, \n    codmuni, lunes, martes, miercoles, jueves, viernes, \n    sabado, domingo, hora_ini_m, hora_fin_m, hora_ini_t,\n    hora_fin_t, modalidad, f_alta, url) \n    VALUES (\n        '${item.codigo}', \n        '${item.titulo}', \n        '${item.municipio}', \n        '${item.centro}', \n        ${item.f_inicio}, \n        ${item.f_fin}, \n        '${item.horas}', \n        '${item.colectivo}', \n        '${item.codprov}', \n        '${item.codmuni}', \n        '${item.lunes}', \n        '${item.martes}', \n        '${item.miercoles}', \n        '${item.jueves}', \n        '${item.viernes}', \n        '${item.sabado}', \n        '${item.domingo}', \n        '${item.hora_ini_m}', \n        '${item.hora_fin_m}', \n        '${item.hora_ini_t}', \n        '${item.hora_fin_t}', \n        '${item.modalidad}', \n        ${item.f_alta}, \n        '${item.url}'\n    )\n`;\nmsg.texto = \"Consulta OK\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 520,
+        "wires": [
+            [
+                "f2777db1fb0d6a7b"
+            ]
+        ]
+    },
+    {
+        "id": "50f2b1a859470061",
+        "type": "iconvfile-out",
+        "z": "679f2057319927dc",
+        "name": "Guardar en iso-8859-1",
+        "filename": "/home/osboxes/Downloads/formacion.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "charset": "iso-8859-1",
+        "x": 160,
+        "y": 460,
+        "wires": [
+            [
+                "78c65e7a23df6eaa"
+            ]
+        ]
+    },
+    {
+        "id": "78c65e7a23df6eaa",
+        "type": "iconvfile-in",
+        "z": "679f2057319927dc",
+        "name": "Cargar en UTF-8",
+        "filename": "/home/osboxes/Downloads/formacion.json",
+        "format": "string",
+        "charset": "iso-8859-1",
+        "chunk": false,
+        "sendError": false,
+        "x": 390,
+        "y": 460,
+        "wires": [
+            [
+                "07cf8c2f9b94bbdf"
+            ]
+        ]
+    },
+    {
+        "id": "d4e41d8883fc3a85",
+        "type": "iconvfile-out",
+        "z": "679f2057319927dc",
+        "name": "Guardar en iso-8859-1",
+        "filename": "/home/osboxes/Downloads/empleo.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "charset": "iso-8859-1",
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "1368fe6bf5ce11c5"
+            ]
+        ]
+    },
+    {
+        "id": "1368fe6bf5ce11c5",
+        "type": "iconvfile-in",
+        "z": "679f2057319927dc",
+        "name": "Cargar en UTF-8",
+        "filename": "/home/osboxes/Downloads/empleo.json",
+        "format": "string",
+        "charset": "iso-8859-1",
+        "chunk": false,
+        "sendError": false,
+        "x": 410,
+        "y": 180,
+        "wires": [
+            [
+                "3804e422d3f5b619"
+            ]
+        ]
+    },
+    {
+        "id": "3804e422d3f5b619",
+        "type": "function",
+        "z": "679f2057319927dc",
+        "name": "Parsear JSONP",
+        "func": "msg.payload = JSON.parse(msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "05af17bbc3190a88"
+            ]
+        ]
+    },
+    {
+        "id": "2449510e04772ccc",
+        "type": "comment",
+        "z": "679f2057319927dc",
+        "name": "Inserción en MySQL",
+        "info": "",
+        "x": 1130,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "01a21d982285e365",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "lanbide",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0; position: relative; height: 100vh; overflow: hidden;
+		}
+		.circulo {
+			position: absolute;
+			width: 150px; height: 150px;
+			border-radius: 9999px;
+			display: flex; justify-content: center; align-items: center;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+
+	<script>
+	// Esta función devuelve una PROMESA. Se trata de un objeto que para construirlo hay que llamar a new Promise, pasándole como parámetro una FUNCIÓN EJECUTORA
+	var duerme = function(tiempo) {
+		return new Promise(
+			function(cumplir, rechazar) {
+				return setTimeout(cumplir, tiempo);
+			}
+		);
+	}
+
+	// La forma tradicional de "consumir" una promesa...
+	duerme(1000)
+	.then(function(){
+		ponActor();
+	})
+	// Problema: ¿y si quisiéramos repetir esto 10 veces?
+	
+
+	// La forma anterior se creó para resolver el "infierno de los callbacks", pero a la hora de la verdad no nos resuelve gran cosa. Para resolver definitivamente ese problema se creó el mecanismo async/await
+	// await significa "ESPERA a que se haya resuelto esta promesa antes de pasar a la línea siguiente"
+	// Si pudiéramos poner awaits libremente en el código, estaríamos haciendo código SÍNCRONO, y se nos bloquearía cada dos por tres. 
+	// Para evitar que la ejecución de JS se bloquee mientras el await está esperando, tienes que poner ese código DENTRO de una función "marcada" con la palabra "async"
+	/* async function yuyu() {
+		await duerme(1000);
+		ponActor();
+	}
+	yuyu(); */
+	// En este caso, si queremos hacer uso del callback rechazar, tendríamos que meter el código de yuyu en un try/catch
+	
+	function ponActor() {
+		// Hace aparecer un círculo dentro del <body>, posiciones aleatorias y color aleatorio
+		var anchura = document.body.clientWidth;
+		var altura = document.body.clientHeight;
+		var x = Math.round(Math.random() * anchura);
+		var y = Math.round(Math.random() * altura);
+		var colorFondo = "#" + Math.round(Math.random() * 16777216).toString(16);
+		document.body.innerHTML += `
+			<div class="circulo" style="top:${y}px; left:${x}px; background-color:${colorFondo}"></div>
+		`;
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+===============================================================================
+INSTRUCCIONES DE INSTALACIÓN DE LA APLICACIÓN
+===============================================================================
+
+
+PREREQUISITOS:
+===============================================================================
+- Servidor web Apache con PHP, y MySQL instalados (LAMP, MAMP, WAMP o XAMPP)
+- Node.js instalado
+- Node-RED instalado
+
+
+INSTALACIÓN DE LA APLICACIÓN
+===============================================================================
+- Copiar la carpeta "lanbide" en la carpeta para las webs del servidor
+	En Windows: C\xampp\htdocs
+	En Linux: /var/www/html, por lo general
+- Si no está arrancado LAMP/XAMPP/etc, arrancarlo
+
+
+PUESTA EN MARCHA DE LA BASE DE DATOS
+===============================================================================
+- Navegador: entrar en localhost/phpmyadmin
+	en el Linux del curso, usuario: osboxes, contraseña: ABCabc123. (con el punto final)
+- Crear la bbdd lanbide (cotejamiento: utf8_general_ci)
+- Una vez creada, entrar en la pestaña "Importar"
+- Pulsar el botón "Examinar" y seleccionar el archivo lanbide.sql que hay en esta carpeta
+- Pulsar Continuar
+
+
+PUESTA EN MARCHA DE NODE-RED
+===============================================================================
+- Abrir una ventana de la terminal
+- Escribe node-red y pulsa Enter
+- Node-RED está en marcha. No toques esta ventana hasta que quieras apagarlo (CTRL + C para apagar)
+
+
+APLICACIÓN DE IMORTACIÓN EN NODE-RED
+===============================================================================
+- Navegador: abre otra pestaña y ve a localhost:1880
+	Ahora has entrado en la aplicación Node-RED
+- En la barra superior, a la derecha del botón rojo que dice "Deploy", hay un menú de 3 rayitas. Púlsalo y escoge la opción "Import"
+- Se abre una ventana con el título "Import nodes"
+- Pulsa el botón "select a file to import"
+- Selecciona el archivo "lanbide flow.json" que hay en esta carpeta
+- Pulsa "Import". Abacas de cargar el programa de importación de datos
+- Puede que tengas que hacer cambios en los nodos de guardar iso-8859-1 y cargar en UTF-8
+	El campo "Filename" debe tener la ruta absoluta al archivo json que creará el programa
+- Doble click en el nodo "lanbide"
+	Pulsa en el botón del icono del lápiz para editar la conexión
+	Asegúrate que el usuario y la contraseña que salen aquí son los mismos de tu servidor de MySQL
+- Cuando hayas terminado, pulsa en el botón "Deploy" de la parte superior de la aplicación
+
+
+USO DE LA APLICACIÓN DE IMPORTACIÓN EN NODE-RED
+===============================================================================
+- Ahora que ya está creado y configurado el importador en Node-Red, vamos a probarlo. 
+- Ten a la vista el panel de la consola de Node-RED
+- En el flujo "FETCH Lanbide empleo", pula el botón del nodo de Inicio.
+	Si todo va bien, en la consola verás un montón de mensajes, pero ningún error.
+	Si ves mensajes de error, es que algo no has configurado bien. Repasa sobre todo la conexión a MySQL
+		y las rutas de guardado de los archivos json temporales.
+- Repite la operación con el botón del nodo de Inicio del flujo "FETCH Lanbide formación"
+- Ahora ve a la pestaña del navegador donde tienes el phpmyadmin. Examina las tablas "lan_empleo" y "lan_formacion"
+	Deberían tener datos. Si no los tienen, algo ha ido mal, pero si el paso anterior no ha dado errores, sería raro
+- Si todo ha ido bien, ya tienes un importador de ofertas de empleo y formativas a una base de datos local
+	Cada vez que pulses los botones de los nodos de Inicio, se añadirán las nuevas ofertas que hayan salido,
+		y se actualizarán las que hayan cambiado.
+
+
+APLICACIÓN WEB PARA LOS BUSCADORES
+===============================================================================
+- Los archivos de esta aplicación ya están en su carpeta correcta. Los puedes ver en localhost/lanbide
+	Si te sale un "Not found", es que no has dejado los archivos en la carpeta del servidor web
+- Si salen, puede funcionar, o no. Si no funciona es porque la API no se conecta con la base de datos
+	En este caso, abre el archivo "inc/ajustes.php", y cambia la línea 2:
+		"localhost" no tendrás que tocarlo nunca, me parece
+		"lanbide" tampoco, si has creado esa base de datos en phpmyadmin
+		"osboxes" es el nombre de usuario de tu base de datos. Por ejemplo, en XAMPP es "root"
+		"ABCabc123." es la contraseña. En XAMPP suele ser una cadena vacía ("")
+- Y ahora ya debería funcionar de una puñetera vez
+- Bonus track: si estás viendo esto en una máquina virtual Linux, que sepas que tienes en marcha 3 servidores:
+  el Apache+PHP, el MySQL y el Node-RED. Y todos ellos son accesibles desde "la parte Windows". 
+  Así que puedes acceder a la aplicación de búsqueda y a la interfaz de Node-RED desde un navegador en Windows
+  en lugar de en Linux. Cómo hacerlo, te lo dejo a ti :-P
+
+
+
+
+
+
+
+
+
+

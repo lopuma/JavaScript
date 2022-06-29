@@ -1,0 +1,113 @@
+================================================================================
+CARACTERÍSTICAS DE LOS MÓDULOS
+================================================================================
+- type="module"
+- Ámbito local. Si necesitamos una varaible global yuyu, usaremos window.yuyu
+- Modo estricto. Nada de usar variables sin declararlas antes
+- Se pueden cargar entre sí
+
+	saluda.js:
+		export function saluda(user) {
+			alert(`Hola, ${user}!`);
+		}
+
+	main.js
+		import {saluda} from './saluda'; 	// Ojo: una url!!
+		alert(saluda); 						// function...
+		saluda('Pepe'); 					// Hola, Pepe!
+	
+- El código de un módulo se evalúa solo la primera vez cuando se importa
+	alert.js
+		alert("el módulo ha sido evaluado!");
+
+	1.js
+		import `./alert.js`; // el módulo ha sido evaluado!
+	2.js
+		import `./alert.js`; // (no muestra nada)
+	
+	Podríamos solventarlo poniendo el alert en una función parametrizada, usando objetos (las propiedades se pueden reescribir), etc.
+	
+- En un módulo, “this” es indefinido (undefined)
+- Los módulos están siempre diferidos
+	- no bloquea el procesamiento de HTML, se cargan en paralelo con otros recursos
+	- esperan hasta que el documento HTML esté completamente listo para ejecutarse
+	- se mantiene el orden relativo de los scripts
+	- por tanto, los módulos siempre “ven” la página HTML completamente cargada, incluidos los elementos HTML debajo de ellos
+
+
+
+================================================================================
+EXPORT E IMPORT
+================================================================================
+- Exports:
+	export let meses = []
+	export const COMISION = 120
+	export class Usuario {}
+	export function saluda(quien) {}
+	
+	o sin export en cada cosas, y con esto al final...
+	
+	export {meses, COMISION, saluda, Usuario};
+	
+- Imports:
+	import {saluda, Usuario} from './yuyu.js';
+	saluda('Pepe');
+	
+	import {saluda as hola, despide as adios} from './comunicacion.js';
+	hola('Pepe');
+	adios('Pepe');
+	
+	o
+	
+	import * as comunicacion from './comunicacion.js';
+	comunicacion.saluda('Pepe');
+	
+	Es preferible lo primero, para que herramientas como Webpack o Gulp sepan qué dejar fuera
+	
+- OJO: no se pueden poner export e import en una condicional. No funcionará
+
+
+================================================================================
+EXPORT DEFAULT
+================================================================================
+- La mayoría de las veces, en cada módulo solo tendremos una cosa que exportar. Para estos casos podríamos simplificar un poco con esto:
+
+	export default class User {}
+	
+	A la hora de importar algo exportado por defecto, podemos omitir las llaves:
+	import User from './user.js';
+	
+	De hecho, la ausencia de llaves al importar es un indicio de que se ha hecho un export default
+	
+- ¿Se puede combinar un export default y uno normal en el mismo archivo? Sí, pero no es nada frecuente
+
+- Si exportamos por defecto podemos hasta omitir el nombre de lo exportado. El nombre se lo daremos en el import.
+	- Pero ojo, cada dev podría darle un nombre distinto, y en trabajo en equipo no es bueno. PAra evitarlo, existe una regla que establece que las variables importadas deben corresponder a los nombres de los archivos
+
+	
+================================================================================
+IMPORTACIONES DINÁMICAS
+================================================================================
+- import ... from obtenNombreModulo(); 	// Error, from sólo permite "string"
+- if() import ...; 						// ¡Error, no permitido!
+- {import ...;} 						// Error, no podemos poner importación en ningún bloque.
+
+- ¿Podemos hacer una importación dinámica? Sí, mediante la función global import() no confundir con el import clásico
+	let rutaModulo = prompt("¿Qué modulo cargar?");
+	import(rutaModulo)
+		.then(obj => <trabajamos con el módulo>)
+		.catch(err => <error de carga, p.ej, el módulo solicitado no existe>)
+
+- Si cargamos en una función asíncrona, podemos usar await...
+	async function carga(){
+		let {hola, adios} = await import('./comunicacion.js');
+		hola();	
+	}
+
+- O, en caso de haber exportado un default:
+	async function carga(){
+		let {default: hola} = await import('./comunicacion.js');
+		hola();
+	}
+
+

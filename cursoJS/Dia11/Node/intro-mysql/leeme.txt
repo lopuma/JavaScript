@@ -1,0 +1,48 @@
+================================================================================
+NODE Y MYSQL: INTRODUCCIÓN
+================================================================================
+
+- Abre el navegador y ve a localhost/phpmyadmin
+	- user: osboxes, pass: ABCabc123. (con el punto final)
+	- Cream la bbdd "cosas" (codificación utf8_general_ci)
+	- Una vez creada, ve a "Importar". Dale al botón de Examinar, y elige el archivo cosas.sql que tienes en esta misma carpeta
+
+
+- En VSCode, abre esta carpeta en el terminal, y ejecuta los siguientes comandos:
+	init --y
+	npm install --save mysql
+
+
+- Crea un archivo llamado index.js. Pega el siguiente código en él:
+	const http = require('http');
+	const url = require("url");
+	const mysql = require('mysql');
+
+	const connection = mysql.createConnection({
+	  host: 'localhost',
+	  user: 'osboxes',
+	  password: 'ABCabc123.',
+	  database: 'cosas'
+	});
+	connection.connect((err) => {
+	  if (err) throw err;
+	  console.log('Conectado a MySQL');
+	});
+
+	const server = http.createServer((req, res) => {
+		//var parsedUrl = url.parse(req.url, true);
+		//console.log(parsedUrl);
+		let salida = [];
+		connection.query("SELECT * FROM geo_provincias", (error, filas) => {
+		  if(error) throw error;
+		  salida = filas;
+		  connection.end();
+		  res.statusCode = 200;
+		  res.setHeader('Content-Type', 'text/json');
+		  res.end(JSON.stringify(salida));
+		});
+	});
+- Ejecútalo desde la terminal:
+	node index.js
+- Y ahora en el navegador ve a localhost:3000
+

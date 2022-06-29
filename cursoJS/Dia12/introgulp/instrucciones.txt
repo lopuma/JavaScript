@@ -1,0 +1,39 @@
+Intro Gulp
+================================================================================
+- Abre una terminal en esta carpeta y pega este texto:
+	sudo npm install -g gulp
+  Dale al Enter. Te pide la contraseña de administrador (osboxes.org)
+
+- Ahora ejecuta esto otro:
+	npm init --y
+  Con esto se instalan todos los módulos de Node.js para este proyecto
+
+- Ejecuta:
+	npm install gulp --save-dev
+  Esto es para añadir el módulo gulp a este proyecto concreto
+
+- Ahora instalamos esto:
+	npm install --save-dev  gulp-concat  gulp-uglify  gulp-uglifycss
+  Esto son herramientas auxiliares de Gulp. En este caso, para unir archivos
+  (gulp-concat), y para "minificarlos" (gulp-uglify, gulp-uglifycss)
+
+- Cada vez que quieras hacer algo con gulp, tienes que crear en esta misma
+  carpeta el archivo gulpfile.js. En este caso ya está creado. Ábrelo y échale
+  un vistazo. Puedes añadir los comentarios que quieras según las explicaciones
+  del formador.
+
+- Si quieres ejecutar una tarea concreta, en la terminal ejecuta gulp seguido del
+  nombre de la tarea. Por ejemplo:
+	gulp hola
+
+- En este proyecto, pondremos en marcha una tarea llamada "vigila":
+	gulp vigila
+  Mientras la terminal del gulp esté abierta, gulp vigilará los cambios que
+  hagamos en los css y los js de la carpeta work. Cuando detecte un cambio, 
+  procederá a unir los archivos de un mismo tipo, quitarles los comentarios
+  y juntarlos en un único archivo que dejará en la carepta dist.
+
+
+
+
+

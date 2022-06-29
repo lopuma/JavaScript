@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Importar módulos</h1>
+	<p>Desde dentro de un script podemos importar otros archivos de JS para cargar y usar sus datos y código.</p>
+	<p><strong>REQUISITOS: </strong><br>
+		- En el archivo que vamos a cargar, debemos poner "export" delante de cualquier variable, constante, función o clase que queramos exportar. Los que no tengan un "export" delante no serán accesibles desde fuera, de modo que se comportarán como variables "privadas".
+		- El script donde vamos a importar las cosas debe tener el atributo type="module".
+		- La ruta del script que vamos a importar debe empezar por "./", y luego el resto de la ruta.
+	</p>
+    <script type="module">
+		// El problema con los imports es que la ruta debe ser por narices una CADENA de texto, no puede ser el contenido de una variable ni lo que devuelve una función. Tampoco podemos hacer un import condicional en un if/else, por ejemplo
+        // Entonces, si no podemos hacer un import dinámico, ¿qué sentido tiene todo esto? ¿Por qué no nos limitamos simplemente a usar <script src="ruta/al/modulo.js"> ? 
+        // ¿Y si tenemos que hacer por narices un import dinámico? ¿No hay nada que podamos hacer?
+        // Pues sí, lo hay. En vez de usar la PALABRA CLAVE imort, usaremos await import(). Podríamos usar las promesas clásicas, lo del await queda más simple. Eso sí, recuerda que un await hay que meterlo dentro de una función async...
+        
+        async function carga(ruta) {
+            var {default: Test} = await import(ruta);
+            var pipo = new Test();
+
+        }
+        carga("./controladores/Test.js");
+    </script>
+</body>
+</html>

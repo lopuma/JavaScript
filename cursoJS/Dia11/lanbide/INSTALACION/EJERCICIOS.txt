@@ -1,0 +1,43 @@
+===============================================================================
+EJERCICIOS
+===============================================================================
+
+- Examina atentamente los flujos de importación de datos en Node-RED. Concretamente, 
+  los nodos "Iterar array". Escribe comentarios indicando cómo funcionan y qué hacen.
+
+- Los nodos "Generar queries" están cogidos con pinzas. Si Lanbide cambiase algún
+  campo sin avisar, las consultas generadas en estos nodos podrían dar error. ¿Se te ocurre
+  alguna forma de hacer el código de estos nodos a prueba de posibles errores?
+
+- En la parte de PHP no te voy a pedir nada, porque este no es un curso de PHP. Solo te 
+  diré que la API de consulta a la base de datos es bastante mierder, pero bueno, cumple
+  su función.
+  Pero en js/formacion.js sí vas a hacer algo. Ahora mismo, el buscador de cursos muestra
+  poca info para lo que tenemos en la base de datos (puedes verlo en phpmyadmin). Así que:
+  
+    - Haz que en la ficha de cada curso aparezca también el campo de la modalidad. Tiene 
+	  estos 3 posibles valores:
+	  	1 = curso presencial
+		2 = curso online
+		3 = curso semipresencial
+		
+	- Haz que en cada curso salga también su horario (p.ej, "de 09:30 a 13:30"). PERO OJO:
+	  si te fijas en la base de datos, los campos para los horarios con 4 (!!):
+	  	hora_ini_m	(hora de inicio por la mañana)
+		hora_fin_m	(hora de salida por la mañana)
+		hora_ini_t	(hora de inicio por la tarde)
+		hora_fin_t	(hora de salida por la tarde)
+	  Si un curso es de mañanas, los campos de horario de la tarde están vacíos, y al revés.
+	  Esto complica un poco la programación.
+	
+	- En la bse de datos tenemos campos para cada uno de los días de la semana en que hay 
+	  clase (lunes, martes, miercoles, jueves, viernes, sabado, domingo). Cada uno de ellos
+	  tiene el valor "1" si hay clase ese día, y "0" si no hay. ¿Podrías hacer que eso se refleje
+	  también en cada resultado de la búsqueda?
+	  
+  PISTA: el código lo tendrás que cambiar en la función render() de empleo.js
+
+
+
+
+

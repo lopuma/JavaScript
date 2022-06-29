@@ -1,0 +1,1 @@
+*{box-sizing:border-box}body{color:#EEE;margin:0}:root{--texto-primario:#333;--texto-secundario:#999}.yuyu{display:grid;grid-template-columns:1f 200px 1fr;gap:20px;font-size:1rem}

@@ -1,0 +1,40 @@
+================================================================================
+INTRODUCCIÓN A NODE.JS
+================================================================================
+
+- Mira en la página oficial las instrucciones de instalación, por si quieres instalarlo en casa
+	https://nodejs.org/en/docs/
+
+
+- Crea el archivo hola.js con el siguiente código
+	console.log("Epa, world");
+- Abre el terminal, y ejecuta esto:
+	node hola.js
+
+
+- Crea el archivo crono.js, con el siguiente código, y ejecútalo en el terminal como con el otro
+	console.log("Esperando....");
+	setTimeout(()=>{
+		console.log("... vale, ya");
+	}, 2000);
+
+
+- Crea servidor.js, con este código:
+	const http = require('http');
+	const url = require("url");
+
+	const server = http.createServer((req, res) => {
+		var parsedUrl = url.parse(req.url, true);
+		console.log(parsedUrl);
+		res.statusCode = 200;
+		res.setHeader('Content-Type', 'text/html');
+		res.end('Epa, mundo<br><img src="yuyu.jpg">');
+	});
+
+	server.listen(3000, 'localhost', () => {
+	  console.log(`Servidor a la escucha en http://localhost:3000/`);
+	});
+- En la terminal, ejecuta esto:
+	node servidor.js
+- Ahora abre el navegador, y ve a localhost:3000. Observa lo que pasa
+- Para detener el servidor, en la terminal pulsa CTRL + C una o varias veces

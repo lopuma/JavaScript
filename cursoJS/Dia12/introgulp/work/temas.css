@@ -1,0 +1,11 @@
+:root {
+    --texto-primario: #333;
+    --texto-secundario: #999;
+}
+.yuyu {
+    /* Esto es para maquetar una serie de cosas que se me acaban de ocurrir */
+    display: grid;
+    grid-template-columns: 1f 200px 1fr;
+    gap: 20px;
+    font-size: 1rem;
+}

@@ -5,29 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
     <title>APP Compliance</title>
     <style>
         .container {
             border: 1px solid #CCC;
             padding: 8px;;
         }
-        .container-        .container {
-            border: 1px solid #CCC;
-            padding: 8px;;
-        }
+
         .container-fluid {
             padding: 18px;;
-        }fluid {
-            padding: 18px;;
         }
+
         textarea {
             column-gap: 50;
         }
-        .notecard {
-            background-color:aqua;
-             margin: 1rem 0;
-            padding: 1rem 1rem 1rem 3rem;
+
+        .code-toolbar {
             position: relative;
+        }
+
+        .code-toolbar>pre {
+            background: #081b4b;
+            color: #fff;
+            border-radius: 16px;
+            display: block;
+            margin: 1em 0;
+            overflow: auto;
+            overflow-wrap: normal;
+            padding: 1em;
+            white-space: normal;
+            word-wrap: normal;
+        }
+
+        .code-toolbar .copy-icon {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.75rem;
+        }
+        pre {
+            font-family: monospace,monospace;
+            font-size: 1em;
+        }
+        .token.function {
+            color: #ff4084;
         }
     </style>
 </head>
@@ -66,7 +88,24 @@
             </div>
         </div>
     </div>
-    <script charset="UTF-8">
+    <div class="code-toolbar">
+        <pre class="prefixed command language-bash">
+            <code>
+                <ol>
+                    <li data-prefix="$">
+                        ::before
+                        <span class="token function">mkdir</span>
+                        <mark>first-servers</mark>
+                        <button type="button" class="icon copy-icon copied">
+                            <i class="fa fa-file"></i>
+                        </button>
+                    </li>
+                </ol>
+            </code>
+        </pre>
+        </div>
+    </div>    
+        <script charset="UTF-8">
         const pathFile = document.querySelector("#formFile");
         const tabla = document.querySelector("#lista-usuario tbody");
         const add = document.querySelector('#añadir');
@@ -150,28 +189,46 @@
                         console.log(comp[i].startsWith('##'));
                         if (comp[i].startsWith('+')){
                             row.innerHTML += `
-                                <div style='text-decoration:none; color:blue; display:block; padding=0'>${comp[i]}</div>
+                                <div style=
+                                color: #081b4b; 
+                                display: block; 
+                                display: block;
+                                margin: 1em 0;
+                                overflow: auto;
+                                overflow-wrap: normal;
+                                padding: 1em;
+                                white-space: normal;
+                                word-wrap: normal;'>${comp[i]}</div>
                             `;
                         }else if (comp[i].startsWith('##')){
                             row.innerHTML += `
                                 <div style='text-decoration:none; color:black; font-weight: bold; display:block'>${comp[i]}</div>
                             `;
-                        }else{
-                            row.innerHTML += `
-                                <div  style='
-  --note-background: var(--background-information);
-  --note-theme: var(--icon-information);
-  background-color: aqua;
-  border: 1px solid var(--border-secondary);
-  border-left: 4px solid var(--note-theme);
-  border-radius: .25rem;
-  border-radius: var(--elem-radius);
-  box-shadow: var(--shadow-01);
-  margin: 1rem 0;
-    margin-bottom: 1rem;
-  padding: 1rem 1rem 1rem 3rem;
-  position: relative;'>${comp[i]}</div>
-                            `;
+                        }else if (comp[i] != ""){
+                                                        
+                            let rosa = comp[i].split(" ")
+                            console.log("DIVIDO ROSA", rosa)
+                            var cmd = rosa[0];
+                            rosa.shift();
+                            rosa = rosa.join(' ')
+                            row.innerHTML += `<div class="section-content" style='background: red'>
+                                <div  style='background: #081b4b;
+            color: #fff;
+            position: relative;
+            border-radius: 16px;
+            display: block;
+            margin: 1em 0;
+            overflow: auto;
+            overflow-wrap: normal;
+            padding: 1em;
+            white-space: normal;
+            word-wrap: normal;'><span style='.token.function {
+            color: #ff4084;
+            }' class="token function">${cmd}</span>
+                            <mark>${rosa}</mark><button type="button" class="icon copy-icon copied" style='
+            position: absolute;
+            right: 0.5rem;
+            top: 0.75rem;'><i class="fa fa-file"></i></button></div></div>`;
                         }
                     }
                     tabla.appendChild(row);

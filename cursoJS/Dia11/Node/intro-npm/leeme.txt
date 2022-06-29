@@ -1,0 +1,19 @@
+================================================================================
+NPM: INTRO
+================================================================================
+- npm es el gestor de paquetes de Node.js, se instala junto con el Node de manera automática, y es una herramienta de línea de comandos, por lo que la tienes que manejar desde el terminal
+
+- Abre una terminal (la del VS Code o la del sistema, da lo mismo)
+- Vamos a instalar este paquete global. Copia este código, pégalo en la terminal y pulsa Enter:
+	sudo npm install -g bower
+- Node-RED está instalado así, con el atributo global (-g). Para instalar paquetes globales tenemos que hacerlo como administradores. Por eso lo de "sudo". Si no, no hace falta
+
+
+================================================================================
+NPM: creación de proyectos
+================================================================================
+- Abre una terminal en esta carpeta
+- Escribe esto, y ve siguiendo las instrucciones
+	npm init
+- Atiende las explicaciones del profe sobre el archivo package.json y la carpeta node_modules
+- También podemos hacer npm init --y, si queremos evitar las preguntas

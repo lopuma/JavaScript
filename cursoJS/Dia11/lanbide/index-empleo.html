@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas de empleo Lanbide</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h1>Lanbide: <small>ofertas de empleo</small></h1>
+        <div>
+            <datalist id="listaMunis"></datalist>
+            <input type="search" id="municipio" name="municipio" placeholder="Municipio" list="listaMunis">
+            <input type="text" id="termino" name="termino" placeholder="Término de búsqueda">
+            <button id="btnReset"><i class="fa-solid fa-fw fa-xmark"></i></button>
+            <button id="btnBusca"><i class="fa-solid fa-fw fa-magnifying-glass"></i></button>
+        </div>
+    </header>
+    <main>
+        <header>Resultados de la búsqueda: <span id="numResultados"></span></header>
+        <div></div>
+        <footer>
+            <button disabled="disabled">Cargar más...</button>
+        </footer>
+    </main>
+    <script src="js/empleo.js "></script>
+</body>
+
+</html>

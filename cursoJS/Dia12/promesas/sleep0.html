@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<script>
+	// Esta función devuelve una PROMESA. Se trata de un objeto que para construirlo hay que llamar a new Promise, pasándole como parámetro una FUNCIÓN EJECUTORA
+	var duerme = function(tiempo) {
+		return new Promise(function(cumplir, rechazar) {
+			// Esta es la función ejecutora. Normalmente contendrá un proceso asíncrono (una llamada por ajax, por ejemplo). Cuando ese proceso se complete, la ejecutora se encargará de llamar a la función cumplir. Si no se puede completar por lo que sea, llamará a rechazar
+			setTimeout(function() { cumplir("lalalá") }, tiempo);
+			// No siempre necesitamos lo de rechazar
+			// Al llamar a cumplir o rechazar, podemos pasarles parámetros para ser usados más adelante (en los .then)
+			if(tiempo < 1000) {
+				rechazar()
+			} else {
+				return setTimeout(cumplir, tiempo);
+			}
+		});
+	}
+
+	
+	console.log("Inicio");
+	duerme(2000).then(function(r){
+		console.log("Fin");
+		console.log(r);
+	}).catch(function(){
+		console.log("Tiempo demasiado corto");
+	});
+	
+
+	
+/* 	async function yuyu() {
+		console.log("Inicio");
+		await duerme(3000);
+		console.log("Fin");
+	}
+	yuyu();
+	// En este caso, si queremos hacer uso del callback rechazar, tendríamos que meter el código de yuyu en un try/catch
+	 */
+
+	</script>
+</body>
+</html>
