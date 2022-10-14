@@ -1,0 +1,81 @@
+// DECLARACION DE VARIABLES
+
+const btnToggle = document.getElementById('btnToggle');
+const navBar = document.getElementById('navBar');
+const btnSidemenu = document.getElementById("btnSidemenu");
+const sideMenu = document.querySelector(".Sidemenu");
+const Aside = document.querySelector(".Aside");
+
+window.onload = onLoad();
+const btnBook = document.getElementById('btnBook');
+const btnBooking = document.getElementById('btnBooking');
+const btnPartner = document.getElementById('btnPartner');
+const btnAdmin = document.getElementById('btnAdmin');
+
+function onLoad() {
+  try {
+
+    // BOOKS
+    if ($('#stateBooks').val() === '') { // 
+      btnBook.classList.add('isSelected');
+    } else {
+      btnBook.classList.remove('isSelected');
+    }
+
+    // BOOKINGS
+    if ($('#stateBookings').val() === '') { // 
+      btnBooking.classList.add('isSelected');
+    } else {
+      btnBooking.classList.remove('isSelected');
+    }
+
+    // PARTNERS
+    if ($('#statePartners').val() === '') { // 
+      btnPartner.classList.add('isSelected');
+    } else {
+      btnPartner.classList.remove('isSelected');
+    }
+
+    // ADMIN
+    if ($('#stateAdmin').val() === '') { // 
+      btnAdmin.classList.add('isSelected');
+    } else {
+      btnAdmin.classList.remove('isSelected');
+    }
+
+
+  } catch {}
+}
+
+btnToggle.addEventListener('click', function () {
+  navBar.classList.toggle('Header-nav__isActive');
+});
+
+
+
+var active = false;
+btnSidemenu.addEventListener("click", () => {
+  Aside.classList.toggle("menu-expanded");
+  Aside.classList.toggle("menu-collapsed");
+  sideMenu.classList.toggle("menu-expanded");
+  sideMenu.classList.toggle("menu-collapsed");
+});
+
+
+let ubicacionPrincipal = window.pageYOffset;
+console.log(ubicacionPrincipal);
+window.onscroll = function () {
+  console.log(ubicacionPrincipal);
+  let Desplazamiento_Actual = window.pageYOffset;
+  console.log(Desplazamiento_Actual);
+
+  if (ubicacionPrincipal >= Desplazamiento_Actual) {
+    document.getElementById('navbar').style.top = '0';
+    document.getElementById('navBar').style.top = 'var(--size-height-navBar)';
+    document.getElementById('sidemenu').style.top = 'var(--size-height-navBar)';
+  } else {
+    document.getElementById('navbar').style.top = '-100px';
+    document.getElementById('navBar').style.top = '0';
+    document.getElementById('sidemenu').style.top = '0px';
+  }
+}
